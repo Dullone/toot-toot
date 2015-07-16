@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   validates :username, presence: true, length: { minimum: 3, maximum: 40 },
               uniqueness: true
   validates :name, presence: true, length: { minimum: 3, maximum: 50 }
-  validates :bio, length: { minimum: 3, maximum: 500 }
-  validates :website, length: { minimum: 3, maximum: 255 }
-  validates :location, length: { minimum: 3, maximum: 255 }
+  validates :bio, length: { maximum: 500 }
+  validates :website, length: { maximum: 255 }
+  validates :location, length: { maximum: 255 }
+
+  has_many :toots
 end
