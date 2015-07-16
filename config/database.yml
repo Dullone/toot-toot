@@ -23,7 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: toot-toot_development
+  database: toot
+  username: odin
+  password: 1ya197d
+  host: localhost
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
