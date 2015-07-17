@@ -8,7 +8,6 @@ class TootsController < ApplicationController
       #TODO render error
       render text: "Toot error"
     end
-
   end
 
 end
