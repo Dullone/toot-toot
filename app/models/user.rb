@@ -1,14 +1,14 @@
 class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :username, presence: true, length: { minimum: 3, maximum: 40 },
+  validates :username, length: { minimum: 3, maximum: 20 },
               uniqueness: true
-  validates :name, presence: true, length: { minimum: 3, maximum: 50 }
+  validates :name, length: { minimum: 3, maximum: 40 }
   validates :bio, length: { maximum: 500 }
   validates :website, length: { maximum: 255 }
   validates :location, length: { maximum: 255 }
