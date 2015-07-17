@@ -1,4 +1,3 @@
-username_check  = true
 username_box    = 'user_username'
 $username_box   = null
 checkDelay      = null
@@ -9,29 +8,23 @@ availibilityClass =
   true:   "ok"
   false:  "error"
 
+checkError = "error checking"
+
 init = () ->
-  unless username_check
-    return
-
-  console.log("inside")
-
   $username_box = $('#' + username_box)
 
-  checkError = "error checking"
-
-  $username_box.change(onUsernameChanged)
+  #$username_box.change(onUsernameChanged)
+  $username_box.on('input',onUsernameChanged)
   $availibility = $('#' + availibility)
 
 
 onUsernameChanged = (event) ->
-  console.log("onUserneameChanged")
   if checkDelay
     clearTimeout(checkDelay)
+  #wait half a second before checking
   checkDelay = setTimeout(checkUsernameAvailibity, 500, $username_box.val())
 
 checkUsernameAvailibity = (username) ->
-  console.log("CheckAvailable:")
-  console.log(username)
   request =
     url: "usernameAvailable"
     data: 
@@ -44,9 +37,6 @@ checkUsernameAvailibity = (username) ->
   $.ajax(request)
 
 showAvailibility = (response) ->
-  console.log(response)
-  console.log($availibility)
-  removeClasses()
   $availibility.text(response.message)
   $availibility.addClass(availibilityClass[response.available])
 
@@ -60,6 +50,7 @@ errorCheckingAvalibility = () ->
   $availibility.addClass(availibilityClass[false])
 
 ajaxWaiting = () ->
+  removeClasses()
   $availibility.text("checking...")
 
-$(document).on("page:change", init)
+$(".registrations.new").ready(init)
