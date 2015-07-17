@@ -1,7 +1,7 @@
 class TootsController < ApplicationController
   
   def show
-    @user = User.find(params[:user_id])
+    @user = User.friendly.find(params[:user_id])
     @toot = Toot.find(params[:id])
     
     if @toot.user != @user
