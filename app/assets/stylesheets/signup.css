@@ -1,0 +1,9 @@
+#username-available{
+  display: inline;
+}
+.error{
+  color: #AA0000;
+}
+.ok{
+ color: #00AA00; 
+}
