@@ -10,4 +10,9 @@ class TootsController < ApplicationController
     end
   end
 
+  def index
+    @user = User.friendly.find(params[:user_id])
+    @toots = @user.toots
+  end
+
 end

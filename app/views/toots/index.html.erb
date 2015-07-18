@@ -1,0 +1,5 @@
+<div class="toots-container center-block">
+  <% @toots.each do |toot| %>
+    <%= render partial: "toot", locals: { user: @user, toot: toot } %>
+  <% end %>
+</div>

@@ -16,3 +16,6 @@ user1 = User.create(
 user1.toots.create(
   message: "My first toot."
  )
+user1.toots.create(
+  message: "This is a long tweet that I hope you'll read the whole thing and that is awesome. Second sentence longer than the first. Hello world of toot"
+ )
