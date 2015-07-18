@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :username, length: { minimum: 3, maximum: 20 },
               uniqueness: true
-  validates :name, length: { minimum: 3, maximum: 40 }
+  validates :name, length: { minimum: 2, maximum: 40 }
   validates :bio, length: { maximum: 500 }
   validates :website, length: { maximum: 255 }
   validates :location, length: { maximum: 255 }
