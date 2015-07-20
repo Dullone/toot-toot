@@ -1,6 +1,6 @@
 .toots-container{
   background-color: #E5F2F7;
-  width: 400px;
+  width: 500px;
   padding: 20px 15px;
   border-radius: 5px;
 }
@@ -8,4 +8,16 @@
   background-color: #FFFFFF;
   border-top: 1px solid #ccc;
   padding: 10px;
+}
+.name{
+  font-weight: bold;
+}
+.username, .time-ago{
+  color: #777;
+}
+#retweet{
+  left: 0;
+  width: 16px;
+  height: 16px;
+  background: url('/assets/ui-icons_228ef1_256x240.png') 0 0;
 }
