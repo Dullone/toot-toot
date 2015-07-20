@@ -18,4 +18,15 @@ body{
 }
 .field{
   padding: 8px 0;
+  input{
+    border: 1px solid rgba(0, 110, 147, 0.47);
+    border-radius: 3px;
+    padding-left: 3px;
+  }
+}
+.new-toot{
+  padding: 5px;
+  input{
+    width: 100%;
+  }
 }
