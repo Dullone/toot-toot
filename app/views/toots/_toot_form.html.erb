@@ -1,15 +1,15 @@
 <div class="row">
   <div class="new-toot">
     <div class="field new-toot" id="new-toot-colapse">
-      <div>what's happening?</div>
+      <div>Whats goin' on?</div>
     </div>
     <div id="toot-form">
     <%= form_for Toot.new, url: user_toots_path do |f| %>
-      <div class="field">
+      <div class="field no-margin">
         <%= f.text_area :message %>
       </div>
       <div>
-        <%= f.submit "toot" %>
+        <%= f.submit "Toot" %>
       </div>
     <% end %>
     </div>

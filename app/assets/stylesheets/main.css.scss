@@ -11,6 +11,18 @@
     color: $dark-blue;
 }
 $dark-blue: #0084B4;
+$light-blue: #4DA9CA;
+
+input[type=submit]{
+  appearance: none;
+  box-shadow: none;
+  border: 1px solid $light-blue;
+  border-radius: 4px;
+  background-color: $dark-blue;
+  color: #FFF;
+  padding: 5px 15px;
+  font-weight: bold;
+}
 
 body{
   background-image: linear-gradient(#1c6399, #4982AD);
@@ -25,9 +37,11 @@ body{
   padding: 40px;
 }
 .field{
-  padding: 8px 0;
   input, textarea{
     @include field-blue;
+  }
+  input{
+    margin: 8px 0;
   }
 }
 #new-toot-colapse{
@@ -37,6 +51,7 @@ body{
   padding: 5px;
   cursor: text;
   display: none;
+  margin: 0;
 }
 .new-toot{
   padding: 5px;
