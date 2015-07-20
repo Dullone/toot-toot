@@ -4,6 +4,14 @@
   background: linear-gradient($direction, $color-stops);
 }
 
+@mixin field-blue() {
+    border: 1px solid rgba(0, 110, 147, 0.47);
+    border-radius: 3px;
+    padding-left: 3px;
+    color: $dark-blue;
+}
+$dark-blue: #0084B4;
+
 body{
   background-image: linear-gradient(#1c6399, #4982AD);
     height: 100%;
@@ -12,21 +20,28 @@ body{
 }
 
 .main-container{
-  background-color: #FFFFFF;
+  background-color: #FFF;
   border-radius: 5px;
   padding: 40px;
 }
 .field{
   padding: 8px 0;
-  input{
-    border: 1px solid rgba(0, 110, 147, 0.47);
-    border-radius: 3px;
-    padding-left: 3px;
+  input, textarea{
+    @include field-blue;
   }
+}
+#new-toot-colapse{
+  @include field-blue;
+  color: $dark-blue;
+  background-color: #FFF;
+  padding: 5px;
+  cursor: text;
+  display: none;
 }
 .new-toot{
   padding: 5px;
-  input{
+  textarea{
     width: 100%;
+    resize: none;
   }
 }
