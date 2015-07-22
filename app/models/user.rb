@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  #Validations
   validates :username, length: { minimum: 3, maximum: 20 },
               uniqueness: true
   validates :name, length: { minimum: 2, maximum: 40 }
@@ -13,5 +15,16 @@ class User < ActiveRecord::Base
   validates :website, length: { maximum: 255 }
   validates :location, length: { maximum: 255 }
 
+  #toots
   has_many :toots
+
+  #folowing
+  has_many :active_follows,  class_name: "Follow", 
+                            foreign_key: "follower_id",
+                              dependant: :destory
+  has_many :passive_follows, class_name: "Follow"
+                            foreign_key: "followed_id"
+                              dependant: :destory
+  has_many :following, through: :active_follows, source: :followed
+  has_many :followers, through: :passive_follows, source: :follower
 end

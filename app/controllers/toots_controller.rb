@@ -6,7 +6,7 @@ class TootsController < ApplicationController
     @toot = Toot.find(params[:id])
     
     if @toot.user != @user
-      #TODO render error
+    #TODO render error
       render text: "Toot error"
     end
   end
@@ -23,6 +23,15 @@ class TootsController < ApplicationController
       redirect_to user_toots_path
     else
       #error
+    end
+  end
+
+  def newToots
+    @user = User.first
+    @toot = @user.toots.first
+
+    respond_to do |format|
+      format.html { render partial: "toot", locals: { user: @user, toot: @toot }  }
     end
   end
 
