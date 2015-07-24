@@ -8,4 +8,6 @@ class Toot < ActiveRecord::Base
 
   #favorites
   has_many :favorites
+  #retoot
+  has_many :retoots
 end

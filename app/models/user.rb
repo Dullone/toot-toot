@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   #toots
   has_many :toots
+  has_many :retoots
 
   #folowing
   has_many :active_follows,  class_name: "Follow", 
@@ -30,4 +31,5 @@ class User < ActiveRecord::Base
 
   #favorites
   has_many :favorites
+
 end
