@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user)  { FactoryGirl.create(:user) }
+  let(:user1) { FactoryGirl.create(:user) }
 
   describe "atrributes"  do 
     it "must have an email" do 
@@ -45,4 +46,16 @@ RSpec.describe User, type: :model do
       expect(user.save).to eql false
     end
   end
+
+  describe "follows" do 
+    it "can follow another user" do 
+      user.active_follows.create(followed: user1)
+      expect(user.following).to include(user1)
+    end
+    it "can be followed by a user" do 
+      user.active_follows.create(followed: user1)
+      expect(user1.followers).to include(user)
+    end
+  end
+
 end
