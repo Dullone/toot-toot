@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Toot, type: :model do
   let(:toot) { FactoryGirl.create(:toot) }
+  let(:user)  { FactoryGirl.create(:user) }
   
   describe "message" do
     it "has a max length of 140" do 
@@ -11,6 +12,13 @@ RSpec.describe Toot, type: :model do
     it "has a minimum legnth of 2" do 
       toot.message = "l" 
       expect(toot.save).to eql false
+    end
+  end
+
+  describe "favorite" do 
+    it "can be favorited" do 
+      favorite = user.favorites.create(toot: toot)
+      expect(toot.favorites).to include(favorite)
     end
   end
 end

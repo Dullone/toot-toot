@@ -27,4 +27,7 @@ class User < ActiveRecord::Base
                               dependent: :destroy
   has_many :following, through: :active_follows, source: :followed
   has_many :followers, through: :passive_follows, source: :follower
+
+  #favorites
+  has_many :favorites
 end
