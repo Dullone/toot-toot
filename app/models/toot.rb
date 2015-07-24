@@ -5,6 +5,7 @@ class Toot < ActiveRecord::Base
 
   #validations
   validates :message, length: { minimum: 2, maximum: 140 }
+  validates :user, presence: true
 
   #favorites
   has_many :favorites

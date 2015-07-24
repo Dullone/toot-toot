@@ -1,5 +1,7 @@
 FactoryGirl.define do 
   factory :toot do 
-    message "This is a toot"
+    sequence :message do |n|
+      "This is a toot #{n}"
+    end
   end
 end

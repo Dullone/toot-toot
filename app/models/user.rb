@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   #toots
   has_many :toots
   has_many :retoots
+  has_many :retooted, through: :retoots, source: :toot
 
   #folowing
   has_many :active_follows,  class_name: "Follow", 
@@ -31,5 +32,15 @@ class User < ActiveRecord::Base
 
   #favorites
   has_many :favorites
+
+  def toots_and_retoots(limit = 20)
+    (toots.limit(limit) + retooted.limit(limit))[0...limit]
+  end
+
+  def feed(limit = 20)
+    user_toots = toots_and_retoots
+    following_toots = Toot.where("user_id IN (?)", following_ids)
+    (user_toots + following_toots)[0..limit]
+  end
 
 end

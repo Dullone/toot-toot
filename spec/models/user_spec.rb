@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user)  { FactoryGirl.create(:user) }
   let(:user1) { FactoryGirl.create(:user) }
-  let(:toot)  { FactoryGirl.create(:toot) }
+  let(:user2) { FactoryGirl.create(:user) }
+  let(:toot)  { user.toots.create(message: "Toot") }
+  let(:toot1) { user1.toots.create(message: "Toot 1") }
+  let(:toot2) { user1.toots.create(message: "Toot 2") }
+  let(:retoot){ user.retoots.create(toot: toot)}
 
   describe "atrributes"  do 
     it "must have an email" do 
@@ -63,6 +67,34 @@ RSpec.describe User, type: :model do
     it "can favorite toots" do 
       favorite = user.favorites.create(toot: toot)
       expect(user.favorites).to include(favorite)
+    end
+  end
+
+  describe "toots_and_retoots" do 
+    it "includes user toots" do 
+      toot #create toot
+      expect(user.toots_and_retoots).to include(toot)
+    end
+    it "includes retoots" do 
+      user.retoots.create(toot: toot1)
+      expect(user.toots_and_retoots).to include(toot1)
+    end
+  end
+
+  describe "feed" do 
+
+    before(:each) do 
+      user.active_follows.create(followed: user1)
+      toot1
+    end
+
+    it "contains toots of usering being followed" do 
+      expect(user.feed).to include(toot1)
+    end
+    it "contains user followed and retoots" do 
+      user.retoots.create(toot: toot2)
+      expect(user.feed).to include(toot1)
+      expect(user.feed).to include(toot2)
     end
   end
 
