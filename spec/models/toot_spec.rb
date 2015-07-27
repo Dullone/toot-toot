@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Toot, type: :model do
-  let(:toot) { FactoryGirl.create(:toot) }
   let(:user)  { FactoryGirl.create(:user) }
+  let(:toot)  { user.toots.create(message: "This is a toot.") }
   
   describe "message" do
     it "has a max length of 140" do 
