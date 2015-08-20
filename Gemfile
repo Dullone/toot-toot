@@ -47,5 +47,6 @@ group :development, :test do
   gem 'capybara'
   gem 'guard-rspec', require: false
   gem 'jasmine'
+  gem 'faker'
 end
 

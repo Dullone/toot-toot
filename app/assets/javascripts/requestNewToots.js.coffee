@@ -1,6 +1,6 @@
 #gets new toots
 requestUrl = "/users/newToots"
-$tootsContainer = nil
+$tootsContainer = null
 newToots        = 0
 
 init = () ->

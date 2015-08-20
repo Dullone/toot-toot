@@ -12,7 +12,9 @@
     <div class="toot-text"><%= toot.message %></div>
 
     <div class="toot-bottom-bar">
-     reply retweet fav
+      reply 
+      <%= link_to "retoot", "#", class: "retoot-toot", "data-tootid": toot.id %>
+      fav
     </div>
 
   </div>
