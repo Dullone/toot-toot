@@ -24,10 +24,15 @@ retoot_complete = (response) ->
   #change retoot link color
   console.log("retoot complete")
   console.log(response)
+  if response.message == window.login_required
+    window.toot_toot_login()
 
 retoot_error = (response) ->
   console.log("retoot error")
-  console.log(response)
+  if response == window.login_required
+    console.log(window.login_required)
+    console.log("errors")
+
 
 $(document).on "page:change", -> 
   init(".toots-container .retoot-toot")

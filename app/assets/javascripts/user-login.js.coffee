@@ -1,6 +1,5 @@
 toot_toot_login = (current_url, redirect_url, options) ->
+  console.log('Attempt login')
   window.location.replace(window.login_url);
 
-$ ->
-  console.log(login_url)
-  return toot_toot_login
+window.toot_toot_login = toot_toot_login

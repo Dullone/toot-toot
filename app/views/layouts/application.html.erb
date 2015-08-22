@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
   <%= javascript_tag do %>
     window.login_url = "<%=j new_user_session_url %>";
+    window.login_required = "<%=j login_required %>";
   <% end %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
