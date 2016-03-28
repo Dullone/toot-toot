@@ -36,6 +36,12 @@ body{
   border-radius: 5px;
   padding: 40px;
 }
+.header{
+  background-color:  #FFF;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px;
+}
 .field{
   input, textarea{
     @include field-blue;

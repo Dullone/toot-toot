@@ -1,0 +1,9 @@
+<div class="header">
+  <% if user_signed_in? %>
+      <%= link_to "sign out",  destroy_user_session_path , method: :delete %>
+  <% elsif controller_name != "sessions" && action_name != "new" %>
+    <%= link_to "sign in",  user_session_path %>
+  <% else %>
+    <%= "not signed in" %>
+  <% end %>
+</div>

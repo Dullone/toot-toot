@@ -13,6 +13,9 @@
 <body class="<%= controller_name %> <%= action_name %>">
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+  <p>
+    <%= render partial: "./users/header" %>
+  </p>
 
 <div class="container">
   <%= yield %>
