@@ -10,7 +10,7 @@ retoot = (event_data) ->
 
 send_retoot_request = (toot_id) ->
   request =
-    url: "retoots"
+    url: "user_retoots"
     type: "POST"
     data: 
       toot_id: toot_id
@@ -29,6 +29,7 @@ retoot_complete = (response) ->
 
 retoot_error = (response) ->
   console.log("retoot error")
+  console.log(response)
   if response == window.login_required
     console.log(window.login_required)
     console.log("errors")
