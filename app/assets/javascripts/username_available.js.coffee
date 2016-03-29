@@ -13,6 +13,8 @@ checkError = "error checking"
 init = () ->
   $username_box = $('#' + username_box)
 
+  console.log("Available start")
+
   #$username_box.change(onUsernameChanged)
   $username_box.on('input',onUsernameChanged)
   $availibility = $('#' + availibility)
@@ -53,4 +55,5 @@ ajaxWaiting = () ->
   removeClasses()
   $availibility.text("checking...")
 
-$(".registrations.new").ready(init)
+$(document).on "page:change", -> 
+  $(".registrations.new").ready(init)

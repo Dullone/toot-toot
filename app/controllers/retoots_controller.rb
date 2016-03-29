@@ -1,10 +1,10 @@
 class RetootsController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     respond_to do |format|
       unless user_signed_in?
-        format.json { render json: { message: "login required"  } }
+        format.json { render json: { message: "login required" } }
       else
       
         #begin
@@ -13,7 +13,7 @@ class RetootsController < ApplicationController
         #  format.json { render json: { message: "not found"  } }
         #end
 
-        unless toot.user == current_user #user can't retoot own toot
+        unless toot.user.id == current_user.id #user can't retoot own toot
           retoot = current_user.retoots.new(toot: toot)
       
           if toot && retoot.save
@@ -23,7 +23,7 @@ class RetootsController < ApplicationController
           end
 
         else
-          format.json { render json: { message: errors_messages.login_required  } }
+          format.json { render json: { message: "Cannot retoot own toot"  } }
         end
       end
     end
