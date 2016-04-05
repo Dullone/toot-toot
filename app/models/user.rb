@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   def feed(limit = 20)
     user_toots = toots_and_retoots
     following_toots = Toot.where("user_id IN (?)", following_ids)
-    (user_toots + following_toots)[0..limit]
+    (user_toots + following_toots)[0..limit].sort!{ |f, s| s[:created_at] <=> f[:created_at ]}
   end
 
 end

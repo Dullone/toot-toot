@@ -3,7 +3,7 @@
 
   <div id="toots-container">
     <% @toots.each do |toot| %>
-      <%= render partial: "toot", locals: { user: @user, toot: toot } %>
+      <%= render partial: "toot", locals: { user: toot.user, toot: toot } %>
     <% end %>
   </div>
   

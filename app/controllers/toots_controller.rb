@@ -13,7 +13,7 @@ class TootsController < ApplicationController
 
   def index
     @user = User.friendly.find(params[:user_id])
-    @toots = @user.toots
+    @toots = @user.feed
   end
 
   def create
