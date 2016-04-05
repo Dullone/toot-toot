@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     resources :toots, except:  [:edit, :update]
     resources :favorites, only: [:create, :destroy]
     resources :retoots, only: [:create, :destroy]
+    resources :follows, only: [:create, :destroy]
   end
 end
