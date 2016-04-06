@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
     (user_toots + following_toots)[0..limit].sort!{ |f, s| s[:created_at] <=> f[:created_at ]}
   end
 
+  def isUserFollowing?(user_id)
+    Follow.isUserFollowingUser?({ follower_id: self.id, followed_id: user_id })
+  end
+
 end

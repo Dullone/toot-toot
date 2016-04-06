@@ -12,7 +12,12 @@ class TootsController < ApplicationController
   end
 
   def index
-    @user = User.friendly.find(params[:user_id])
+    begin
+      @user = User.friendly.find(params[:user_id])
+    rescue ActiveRecord::RecordNotFound
+      render file: 'public/404.html', status: :not_found
+      return
+    end
     @toots = @user.feed
   end
 

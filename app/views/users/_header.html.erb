@@ -2,12 +2,13 @@
   <% if user_signed_in? %>
       <%= link_to "sign out",  destroy_user_session_path , method: :delete %> | 
       <%= link_to "toots", user_toots_path(current_user) %>
-      <% if @user != current_user && @user %> 
-        <%=  render partial:  "/follows/follow_form", locals: { user: @user } %>
+      <% if @user != current_user && @user %>
+        <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
       <% end %>
   <% elsif controller_name != "sessions" && action_name != "new" %>
     <%= link_to "sign in",  user_session_path %>
   <% else %>
     <%= "not signed in" %>
   <% end %>
+  | <%= link_to "users", users_path %>
 </div>

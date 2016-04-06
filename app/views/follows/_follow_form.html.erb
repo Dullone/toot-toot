@@ -1,3 +1,5 @@
-<%= form_for Follow.new, url: user_follows_path(current_user) do |f| %>
-  <%= f.submit ("follow "  + user.username )  %>
-<% end %>
+<div class="follow-button">
+  <%= form_for Follow.new, url: user_follows_path(current_user) do |f| %>
+    <%= f.submit ("follow "  + user.username )  %>
+  <% end %>
+</div>

@@ -13,4 +13,15 @@ RSpec.describe Follow, type: :model do
     follow = Follow.new(follower_id: user1.id)
     expect(follow.save).to equal false
   end
+
+  it "creates a follow when given valid arguments" do
+    follow = Follow.new(follower_id: user1.id, followed_id: user.id)
+    expect(follow.save).to equal true
+  end
+
+  it "gets a follow" do 
+    follow = Follow.new(follower_id: user1.id, followed_id: user.id)
+    follow.save
+    expect(Follow.getFollow({follower_id: user1.id, followed_id: user.id})).to eq follow
+  end
 end
