@@ -13,7 +13,11 @@
 
     <div class="toot-bottom-bar">
       reply 
-      <%= link_to "retoot", "#", class: "retoot-toot", "data-tootid": toot.id %>
+      <% unless hasCurrentUserRetooted? toot.id  %>
+        <%= link_to "retoot", "#", class: "retoot-toot", "data-tootid": toot.id %>
+      <% else %>
+        <span class="retooted">&#8635;</span>
+      <% end %>
       fav
     </div>
 
