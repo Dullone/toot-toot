@@ -13,4 +13,7 @@ Rails.application.routes.draw do
     resources :retoots, only: [:create, :destroy]
     resources :follows, only: [:create, :destroy]
   end
+
+  get "toots/feed" => "toots#feed"
+
 end

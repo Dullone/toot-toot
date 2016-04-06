@@ -18,7 +18,7 @@ class TootsController < ApplicationController
       render file: 'public/404.html', status: :not_found
       return
     end
-    @toots = @user.feed
+    @toots = @user.toots
   end
 
   def create
@@ -29,6 +29,10 @@ class TootsController < ApplicationController
     else
       #error
     end
+  end
+
+  def feed
+    @toots = current_user.feed
   end
 
   def newToots

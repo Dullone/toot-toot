@@ -1,7 +1,8 @@
 <div class="header">
   <% if user_signed_in? %>
       <%= link_to "sign out",  destroy_user_session_path , method: :delete %> | 
-      <%= link_to "toots", user_toots_path(current_user) %>
+      <%= link_to "toots", user_toots_path(current_user) %> |
+      <%= link_to "feed", toots_feed_path  %>
       <% if @user != current_user && @user %>
         <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
       <% end %>

@@ -4,7 +4,7 @@
       <div>Whats goin' on?</div>
     </div>
     <div id="toot-form">
-    <%= form_for Toot.new, url: user_toots_path do |f| %>
+    <%= form_for Toot.new, url: user_toots_path(current_user) do |f| %>
       <div class="field no-margin">
         <%= f.text_area :message %>
       </div>

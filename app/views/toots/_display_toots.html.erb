@@ -1,0 +1,10 @@
+<div class="toots-container center-block">
+  <%= render partial: "toots/toot_form" %>
+
+  <div id="toots-container">
+    <% toots.each do |toot| %>
+      <%= render partial: "toots/toot", locals: { user: toot.user, toot: toot } %>
+    <% end %>
+  </div>
+  
+</div>
