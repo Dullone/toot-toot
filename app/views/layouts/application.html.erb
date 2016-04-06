@@ -11,8 +11,11 @@
   <% end %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  
+  <% flash.each do |key, value|  %>
+    <%= content_tag :p, value, class: key %>
+  <% end %>
+
   <p>
     <%= render partial: "./users/header" %>
   </p>

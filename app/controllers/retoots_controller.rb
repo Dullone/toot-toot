@@ -4,7 +4,7 @@ class RetootsController < ApplicationController
   def create
     respond_to do |format|
       unless user_signed_in?
-        format.json { render json: { message: "login required" } }
+        format.json { render json: { message: "login required", status: 401  } }
       else
       
         #begin

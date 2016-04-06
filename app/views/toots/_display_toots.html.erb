@@ -1,5 +1,7 @@
 <div class="toots-container center-block">
-  <%= render partial: "toots/toot_form" %>
+  <% if user_signed_in?  %>
+    <%= render partial: "toots/toot_form" %>
+  <% end %>
 
   <div id="toots-container">
     <% toots.each do |toot| %>

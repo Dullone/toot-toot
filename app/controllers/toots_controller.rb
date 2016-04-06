@@ -1,5 +1,5 @@
 class TootsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :feed]
   
   def show
     @user = User.friendly.find(params[:user_id])

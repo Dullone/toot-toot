@@ -25,18 +25,16 @@ send_retoot_request = (toot_id) ->
 retoot_complete = (response) ->
   #change retoot link color
   console.log("retoot complete")
-  console.log(response)
-  if response.message == window.login_required
-    window.toot_toot_login()
+  console.log(response)    
   if response.message == "saved"
-    $clicked_toot.text("↻")
+    $clicked_toot.replaceWith("↻")
 
 retoot_error = (response) ->
   console.log("retoot error")
   console.log(response)
-  if response == window.login_required
+  if response == window.login_required || response.status == 401
     console.log(window.login_required)
-    console.log("errors")
+    window.toot_toot_login()
 
 
 $(document).on "page:change", -> 

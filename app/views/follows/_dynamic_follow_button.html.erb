@@ -1,10 +1,12 @@
 <div class="follow-block">
-  <% if current_user.following.include?(user) %>
-    <%= render partial: "follows/unfollow_form", locals: { 
-      user: user, follow: Follow.getFollow(follower_id: current_user.id, 
-                                   followed_id: user.id )  } 
-    %>
-  <% else %>
-    <%=  render partial: "follows/follow_form", locals: { user: user } %>
+  <% if user_signed_in?  %>
+    <% if current_user.following.include?(user) %>
+      <%= render partial: "follows/unfollow_form", locals: { 
+        user: user, follow: Follow.getFollow(follower_id: current_user.id, 
+                                     followed_id: user.id )  } 
+      %>
+    <% else %>
+      <%=  render partial: "follows/follow_form", locals: { user: user } %>
+    <% end %>
   <% end %>
 </div>
