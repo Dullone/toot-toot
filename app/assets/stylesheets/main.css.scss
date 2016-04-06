@@ -13,6 +13,7 @@
 $dark-blue: #0084B4;
 $light-blue: #4DA9CA;
 $dark-red: #b30000;
+$light-red: #ff8566;
 
 input[type=submit]{
   appearance: none;
@@ -25,12 +26,14 @@ input[type=submit]{
   font-weight: bold;
 }
 
-.follow-button, .unfollow-button{
+input[type=submit].follow-button, input[type=submit].unfollow-button{
+  padding: 2px 10px;
   display: inline-block;
 }
 
 input[type=submit].unfollow-button{
   background-color: $dark-red;
+  border-color: $light-red;
 }
 
 body{
@@ -38,6 +41,10 @@ body{
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+.user-container{
+
 }
 
 .main-container{
@@ -83,4 +90,9 @@ body{
 
 .notice{
   background-color: #00802b;
+}
+
+.follow-block{
+  display: inline-block;
+  margin: 3px;
 }
