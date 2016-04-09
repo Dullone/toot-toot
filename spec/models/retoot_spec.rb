@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Retoot, type: :model do
   let(:user)  { FactoryGirl.create(:user) }
-  let(:toot)  { FactoryGirl.create(:toot) }
+  let(:toot)  { user.toots.create(message: "Toot") }
   let(:retoot) { user.retoots.create(toot: toot)}
   
   it "has a usesr" do 

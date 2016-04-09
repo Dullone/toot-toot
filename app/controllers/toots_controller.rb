@@ -33,15 +33,24 @@ class TootsController < ApplicationController
 
   def feed
     @toots = current_user.feed
+    setLastFeedUpdate
   end
 
-  def newToots
-    @user = User.first
+  def newFeedToots
+    setLastFeedUpdate
+
     @toot = @user.toots.first
 
     respond_to do |format|
-      format.html { render partial: "toot", locals: { user: @user, toot: @toot }  }
+      respond = [(render_to_string partial: "toots/toot", locals: { user: @user, toot: @toot })]
+      format.json { render json: respond }
     end
   end
+
+  protected
+    def setLastFeedUpdate(time = Time.now)
+      user_session = session[current_user.id] || { last_feed_update: Time.now }
+      user_session[:last_feed_update] = time
+    end
 
 end

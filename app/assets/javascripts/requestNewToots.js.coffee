@@ -1,32 +1,39 @@
 #gets new toots
-requestUrl = "/users/newToots"
+requestUrl = "/users/newFeedToots"
 $tootsContainer = null
 newToots        = 0
+requestInterval = 2000
 
 init = () ->
   $tootsContainer = $('#toots-container')
-  setTimeout(requestNewToots)
+  setTimeout(requestNewToots, requestInterval)
 
 requestNewToots = () ->
   request =
     url:        requestUrl
-    dataType:   "html"
+    dataType:   "json"
     success:    htmlRecieved
     error:      error
 
   $.ajax(request)
 
 htmlRecieved = (response) ->
-  addNewToots(respons)
+  console.log(response)
+  addNewToots(response)
 
 addNewToots = (toots) ->
-  
-  newToots++
-  $response = $(response)
-  $tootsContainer.prepend($response)
-  $response.hide().slideDown()
+  for toot in toots
+    do(toot) ->
+      newToots++
+      $toot = $(toot)
+      $tootsContainer.prepend($toot)
+      $toot.hide().slideDown()
 
-error = () ->
+error = (response) ->
   console.log("error")
+  console.log(response)
+  console.log(response.responseText)
 
-#$(".toots.index").ready(init)
+
+$(document).on "page:change", -> 
+  $(".toots.index").ready(init)

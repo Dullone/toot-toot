@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Favorite, type: :model do
   let(:user)  { FactoryGirl.create(:user) }
-  let(:toot)  { FactoryGirl.create(:toot) }
+  let(:toot)  { user.toots.create(message: "Toot") }
   let(:favorite) { user.favorites.create(toot: toot) }
 
   it "can have a user" do 

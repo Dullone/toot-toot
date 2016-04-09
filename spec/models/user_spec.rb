@@ -5,8 +5,8 @@ RSpec.describe User, type: :model do
   let(:user1) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
   let(:toot)  { user.toots.create(message: "Toot") }
-  let(:toot1) { user1.toots.create(message: "Toot 1") }
-  let(:toot2) { user1.toots.create(message: "Toot 2") }
+  let(:user1Toot1) { user1.toots.create(message: "Toot 1", created_at: (Time.now - 3.minutes)) }
+  let(:user1Toot2) { user1.toots.create(message: "Toot 2", created_at: Time.now)  }
   let(:retoot){ user.retoots.create(toot: toot)}
 
   describe "atrributes"  do 
@@ -76,8 +76,8 @@ RSpec.describe User, type: :model do
       expect(user.toots_and_retoots).to include(toot)
     end
     it "includes retoots" do 
-      user.retoots.create(toot: toot1)
-      expect(user.toots_and_retoots).to include(toot1)
+      user.retoots.create(toot: user1Toot1)
+      expect(user.toots_and_retoots).to include(user1Toot1)
     end
   end
 
@@ -85,17 +85,25 @@ RSpec.describe User, type: :model do
 
     before(:each) do 
       user.active_follows.create(followed: user1)
-      toot1
+      user1Toot1
     end
 
     it "contains toots of usering being followed" do 
-      expect(user.feed).to include(toot1)
+      expect(user.feed).to include(user1Toot1)
     end
     it "contains user followed and retoots" do 
-      user.retoots.create(toot: toot2)
-      expect(user.feed).to include(toot1)
-      expect(user.feed).to include(toot2)
+      user.retoots.create(toot: user1Toot2)
+      expect(user.feed).to include(user1Toot1)
+      expect(user.feed).to include(user1Toot2)
     end
+
+    it "gets new toots since a given Time" do
+      last_update = Time.now - 2.minutes
+      new_toots = user.getFeedTootsSince(last_update)
+      expect(new_toots).to      include user1Toot2
+      expect(new_toots).not_to  include user1Toot1
+    end
+
   end
 
 end
