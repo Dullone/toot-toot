@@ -7,6 +7,7 @@ requestInterval = 2000
 init = () ->
   $tootsContainer = $('#toots-container')
   setTimeout(requestNewToots, requestInterval)
+  console.log("requestin new toots")
 
 requestNewToots = () ->
   request =
@@ -36,4 +37,4 @@ error = (response) ->
 
 
 $(document).on "page:change", -> 
-  $(".toots.index").ready(init)
+  $(".toots.feed").ready(init)

@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   def getFeedTootsSince(time)
     user_toots = toots_and_retoots
-    new_toots = Toot.where("user_id IN (?) AND created_at > ?", following_ids, time)
+    new_toots = Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc)
   end
 
   def isUserFollowing?(user_id)

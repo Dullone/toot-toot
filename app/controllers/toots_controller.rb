@@ -37,13 +37,17 @@ class TootsController < ApplicationController
   end
 
   def newFeedToots
+    new_toots = current_user.getFeedTootsSince(Time.now - 3.days)#getLastFeedUpdate)
     setLastFeedUpdate
 
-    @toot = @user.toots.first
+    response = []
 
     respond_to do |format|
-      respond = [(render_to_string partial: "toots/toot", locals: { user: @user, toot: @toot })]
-      format.json { render json: respond }
+      new_toots.each do |toot|
+          #us unshift so when we unwind the array on the client, its in the correct order
+          response.unshift(render_to_string partial: "toots/toot", locals: { user: toot.user, toot: toot })
+      end
+      format.json { render json: response }
     end
   end
 
@@ -51,6 +55,10 @@ class TootsController < ApplicationController
     def setLastFeedUpdate(time = Time.now)
       user_session = session[current_user.id] || { last_feed_update: Time.now }
       user_session[:last_feed_update] = time
+    end
+
+    def getLastFeedUpdate
+      session[current_user.id] && session[current_user.id][:last_feed_update] ||  Time.now
     end
 
 end
