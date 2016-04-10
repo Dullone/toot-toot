@@ -5,16 +5,17 @@ newToots        = 0
 updateRequestTimer = null
 requestInterval = 2000 #2 seconds
 requestIntervalLong = 30000 #1/2 minute
+requestPending = false
 
 init = () ->
   $tootsContainer = $('#toots-container')
   updateRequestTimer = setTimeout(getNewToots, requestInterval)
-  console.log("requestin new toots")
-  console.log(updateRequestTimer)
 
 getNewToots = () ->
+  clearUpdateQueue()
   requestNewToots()
   updateRequestTimer = setTimeout(getNewToots, requestIntervalLong)
+  console.log('get new toots')
 
 clearUpdateQueue = () ->
   clearTimeout(updateRequestTimer)
@@ -26,10 +27,11 @@ requestNewToots = () ->
     success:    htmlRecieved
     error:      error
 
+  requestPending = true
   $.ajax(request)
 
 htmlRecieved = (response) ->
-  console.log(response)
+  requestPending = false
   addNewToots(response)
 
 addNewToots = (toots) ->
@@ -41,10 +43,10 @@ addNewToots = (toots) ->
       $toot.hide().slideDown()
 
 error = (response) ->
-  console.log("error")
-  console.log(response)
-  console.log(response.responseText)
+  requestPending = false
+  console.log("error with request")
 
+@getNewToots = getNewToots
 
 $(document).on "page:change", -> 
   clearUpdateQueue()

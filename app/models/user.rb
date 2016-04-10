@@ -38,10 +38,10 @@ class User < ActiveRecord::Base
   end
 
   def toots_and_retoots_since(time, limit = 20)
-    puts "toots_and_retoots_since + time: " + time
     new_retoots = Retoot.where("user_id IN (?) AND created_at > ?", following_ids, time).select("toot_id").limit(limit)
     Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc) + 
-      Toot.where("id in (?)", new_retoots)
+      Toot.where("id in (?)", new_retoots) + 
+      self.toots.where("created_at > ?", time).limit(limit)
       
   end
 
