@@ -2,12 +2,22 @@
 requestUrl = "/users/newFeedToots"
 $tootsContainer = null
 newToots        = 0
-requestInterval = 2000
+updateRequestTimer = null
+requestInterval = 2000 #2 seconds
+requestIntervalLong = 30000 #1/2 minute
 
 init = () ->
   $tootsContainer = $('#toots-container')
-  setTimeout(requestNewToots, requestInterval)
+  updateRequestTimer = setTimeout(getNewToots, requestInterval)
   console.log("requestin new toots")
+  console.log(updateRequestTimer)
+
+getNewToots = () ->
+  requestNewToots()
+  updateRequestTimer = setTimeout(getNewToots, requestIntervalLong)
+
+clearUpdateQueue = () ->
+  clearTimeout(updateRequestTimer)
 
 requestNewToots = () ->
   request =
@@ -37,4 +47,5 @@ error = (response) ->
 
 
 $(document).on "page:change", -> 
+  clearUpdateQueue()
   $(".toots.feed").ready(init)

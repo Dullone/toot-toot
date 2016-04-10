@@ -99,6 +99,7 @@ RSpec.describe User, type: :model do
 
     it "gets new toots since a given Time" do
       last_update = Time.now - 2.minutes
+      user1Toot2
       new_toots = user.getFeedTootsSince(last_update)
       expect(new_toots).to      include user1Toot2
       expect(new_toots).not_to  include user1Toot1

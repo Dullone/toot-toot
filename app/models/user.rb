@@ -37,6 +37,14 @@ class User < ActiveRecord::Base
     (toots.limit(limit) + retooted.limit(limit))[0...limit]
   end
 
+  def toots_and_retoots_since(time, limit = 20)
+    puts "toots_and_retoots_since + time: " + time
+    new_retoots = Retoot.where("user_id IN (?) AND created_at > ?", following_ids, time).select("toot_id").limit(limit)
+    Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc) + 
+      Toot.where("id in (?)", new_retoots)
+      
+  end
+
   def feed(limit = 20)
     user_toots = toots_and_retoots
     following_toots = Toot.where("user_id IN (?)", following_ids)
@@ -44,8 +52,8 @@ class User < ActiveRecord::Base
   end
 
   def getFeedTootsSince(time)
-    user_toots = toots_and_retoots
-    new_toots = Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc)
+    #new_toots = Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc)
+    toots_and_retoots_since(time)
   end
 
   def isUserFollowing?(user_id)

@@ -37,7 +37,7 @@ class TootsController < ApplicationController
   end
 
   def newFeedToots
-    new_toots = current_user.getFeedTootsSince(Time.now - 3.days)#getLastFeedUpdate)
+    new_toots = current_user.getFeedTootsSince(getLastFeedUpdate)
     setLastFeedUpdate
 
     response = []
@@ -52,13 +52,12 @@ class TootsController < ApplicationController
   end
 
   protected
-    def setLastFeedUpdate(time = Time.now)
-      user_session = session[current_user.id] || { last_feed_update: Time.now }
-      user_session[:last_feed_update] = time
+    def setLastFeedUpdate(time = Time.now.utc)
+      session[:last_feed_update] = time
     end
 
     def getLastFeedUpdate
-      session[current_user.id] && session[current_user.id][:last_feed_update] ||  Time.now
+      session[:last_feed_update]
     end
 
 end
