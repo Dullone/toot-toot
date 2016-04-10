@@ -16,4 +16,5 @@
 //= require jquery-readyselector
 //= require jquery-ui
 //= require bootstrap-sprockets
+//= require jquery.timeago
 //= require_tree .

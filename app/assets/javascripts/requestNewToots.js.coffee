@@ -33,6 +33,7 @@ requestNewToots = () ->
 htmlRecieved = (response) ->
   requestPending = false
   addNewToots(response)
+  $("time.timeago").timeago()
 
 addNewToots = (toots) ->
   for toot in toots
