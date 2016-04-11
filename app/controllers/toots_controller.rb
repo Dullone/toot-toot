@@ -1,5 +1,5 @@
 class TootsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :feed]
+  before_action :authenticate_user!, only: [:create, :feed, :delete]
   
   def show
     @user = User.friendly.find(params[:user_id])
@@ -30,6 +30,28 @@ class TootsController < ApplicationController
       #error
     end
   end
+
+  def destroy
+    response = ""
+
+    begin
+      toot = Toot.find(params[:id])
+      
+      unless toot.user_id == current_user.id 
+        response = { status: "not authorized" }
+      else
+        toot.destroy
+        response = { status: "success" }
+      end
+    rescue
+      response = { status: "not found"}
+    end
+
+    respond_to do |format|
+      format.json { render json: response }
+    end
+  end
+
 
   def feed
     @toots = current_user.feed

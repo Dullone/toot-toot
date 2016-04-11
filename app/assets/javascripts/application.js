@@ -17,4 +17,6 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require jquery.timeago
+//- require sweet-alert-confirm
+//= require sweetalert
 //= require_tree .

@@ -27,6 +27,10 @@ gem 'devise'
 gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem "jquery-ui-rails"
+gem "sweet-alert"
+source 'https://rails-assets.org' do
+  gem 'rails-assets-sweetalert' 
+end
 
 group :production do
   gem 'rails_12factor'

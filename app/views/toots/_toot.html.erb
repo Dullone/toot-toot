@@ -23,6 +23,10 @@
         <span class="retooted">&#8635;</span>
       <% end %>
       fav
+      <% if toot.user_id == current_user.id %>
+        <%= link_to "delete", user_toot_path(current_user, toot.id), 
+                              class: "delete-toot"  %> 
+      <% end %>
     </div>
 
   </div>
