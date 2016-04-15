@@ -7,13 +7,19 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+  MAX_USERNAME_LENGTH = 20
+  MAX_BIO_LENGHT = 500
+  MAX_NAME_LENGTH = 40
+  MAX_WEBSITE_LENGTH = 255
+  MAX_LOCATION_LENGTH = 255
   #Validations
-  validates :username, length: { minimum: 3, maximum: 20 },
+  validates :username, length: { minimum: 3, maximum: MAX_USERNAME_LENGTH },
               uniqueness: true
-  validates :name, length: { minimum: 2, maximum: 40 }
-  validates :bio, length: { maximum: 500 }
-  validates :website, length: { maximum: 255 }
-  validates :location, length: { maximum: 255 }
+  validates :name, length: { minimum: 2, maximum: MAX_NAME_LENGTH }
+  validates :bio, length: { maximum: MAX_BIO_LENGHT }
+  validates :website, length: { maximum: MAX_WEBSITE_LENGTH }
+  validates :location, length: { maximum: MAX_LOCATION_LENGTH }
 
   #toots
   has_many :toots

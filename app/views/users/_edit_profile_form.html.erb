@@ -1,0 +1,13 @@
+<div id="edit-profile">
+  <%= form_for user do |f|%>
+    <%= f.label :name %>
+    <div class="field"><%= f.text_field :name, maxlength: User::MAX_NAME_LENGTH %></div>
+    <%= f.label :bio %>
+    <div class="field"><%= f.text_area :bio, maxlength: User::MAX_BIO_LENGHT %></div>
+    <%= f.label :location %>
+    <div class="field"><%= f.text_area :location, maxlength: User::MAX_LOCATION_LENGTH %></div>
+    <%= f.label :website %>
+    <div class="field"><%= f.text_area :website, maxlength: User::MAX_WEBSITE_LENGTH %></div>
+    <%= f.submit %>
+  <% end %>
+</div>
