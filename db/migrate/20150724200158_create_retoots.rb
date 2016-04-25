@@ -6,9 +6,9 @@ class CreateRetoots < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :retoots, :user
-    add_index :retoots, :toot
-    add_index :retoots, [:user, :toot], unique: true
+    add_index :retoots, :user_id
+    add_index :retoots, :toot_id
+    add_index :retoots, [:user_id, :toot_id], unique: true
   end
 end
 
