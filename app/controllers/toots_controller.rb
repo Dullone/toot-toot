@@ -55,6 +55,7 @@ class TootsController < ApplicationController
 
   def feed
     @toots = current_user.feed
+    @user = current_user
     setLastFeedUpdate
   end
 

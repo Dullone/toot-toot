@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   resources :users do
     resources :toots, except:  [:edit, :update]
     resources :favorites, only: [:create, :destroy]
-    resources :retoots, only: [:create, :destroy]
     resources :follows, only: [:create, :destroy]
   end
+
+  resources :retoots, only: [:create, :destroy]
 
   get "toots/feed" => "toots#feed"
 

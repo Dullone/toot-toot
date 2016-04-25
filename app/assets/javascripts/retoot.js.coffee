@@ -12,7 +12,7 @@ retoot = (event_data) ->
 
 send_retoot_request = (toot_id) ->
   request =
-    url: "retoots"
+    url: window.retoot_url
     type: "POST"
     data: 
       toot_id: toot_id

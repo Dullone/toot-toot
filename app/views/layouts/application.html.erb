@@ -8,6 +8,7 @@
   <%= javascript_tag do %>
     window.login_url = "<%=j new_user_session_url %>";
     window.login_required = "<%=j login_required %>";
+    window.retoot_url = "<%=j retoots_url %>";
   <% end %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
@@ -16,11 +17,10 @@
     <%= content_tag :p, value, class: key %>
   <% end %>
 
-  <div class="header">
-    <%= render partial: "./users/header" %>
-  </div>
+  <%= render partial: "./users/header" %>
 
-<div class="container">
+
+<div class="container" id="main-container">
   <%= yield %>
 </div>  
 

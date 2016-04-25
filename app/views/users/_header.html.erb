@@ -4,13 +4,10 @@
       <%= link_to("edit profile", edit_user_path(current_user) ) %> |
       <%= link_to "my toots", user_toots_path(current_user) %> |
       <%= link_to "feed", toots_feed_path  %> |
-      <% if @user != current_user && @user %>
-        | <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
-      <% end %>
   <% elsif controller_name != "sessions" && action_name != "new" %>
     <%= link_to "sign in",  user_session_path %>
   <% else %>
     <%= "not signed in" %>
   <% end %>
-  | <%= link_to "users", users_path %>
+  <%= link_to "users", users_path %>
 </div>

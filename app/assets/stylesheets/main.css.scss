@@ -10,6 +10,9 @@
     padding-left: 3px;
     color: $dark-blue;
 }
+@mixin rounded-corners() {
+  border-radius: 5px;
+}
 $dark-blue: #0084B4;
 $light-blue: #4DA9CA;
 $dark-red: #b30000;
@@ -29,11 +32,17 @@ input[type=submit]{
 input[type=submit].follow-button, input[type=submit].unfollow-button{
   padding: 2px 10px;
   display: inline-block;
+  background-color: $light-blue;
 }
 
-input[type=submit].unfollow-button{
+input[type=submit].unfollow-button:hover{
   background-color: $dark-red;
   border-color: $light-red;
+}
+
+input[type=submit].follow-button:hover{
+  background-color: $dark-blue;
+  border-color: $light-blue;
 }
 
 body{
@@ -49,20 +58,33 @@ body{
 
 .main-container{
   background-color: #FFF;
-  border-radius: 5px;
+  @include rounded-corners;
   padding: 40px;
 }
 .toots-container, .users-container, .user-container{
   background-color: #E5F2F7;
   width: 500px;
   padding: 20px 15px;
-  border-radius: 5px;
+  @include rounded-corners;
+}
+
+.user-container{
+  background-color: #FFF;
+  width: 400px;
+  margin: 15px 10px;
+  @include rounded-corners;
+}
+
+#main-container{
+  padding-top: 50px;
 }
 .header{
   background-color:  #FFF;
-  display: inline-block;
-  border-radius: 5px;
-  padding: 4px;
+  padding: 5px;
+  margin-bottom: 30px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 .field{
   input, textarea{
@@ -99,6 +121,16 @@ body{
 }
 .alert{
   background-color: #ff3333;
+}
+
+#side-profile{
+  background-color: #fff;
+  @include rounded-corners;
+  padding: 15px;
+  h3{
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
 }
 
 .follow-block{

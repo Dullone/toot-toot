@@ -2,9 +2,9 @@
 
   <div id="user-container">
     <% @users.each do |user| %>
-      <div class="user-container">
+      <div class="user-container center-block">
         <%= render partial: "user", locals: { user: user } %>
-        <% if user != current_user %>
+        <% if user != current_user %> <br/>
           <%= render partial: "follows/dynamic_follow_button", locals: { user: user }%>
         <% end %>
       </div>

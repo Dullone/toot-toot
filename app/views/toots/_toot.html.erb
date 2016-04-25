@@ -17,9 +17,9 @@
 
     <div class="toot-bottom-bar">
       reply 
-      <% unless hasCurrentUserRetooted? toot.id  %>
+      <% if isValidRetoot? toot.id %>
         <%= link_to "retoot", "javascript:void(0)", class: "retoot-toot", "data-tootid": toot.id %>
-      <% else %>
+      <% elsif hasCurrentUserRetooted? toot.id %>
         <span class="retooted">&#8635;</span>
       <% end %>
       fav

@@ -1,1 +1,4 @@
-<%= render partial: "display_toots", locals: { toots: @toots } %>
+<div class="col-md-3">
+  <%= render partial: "users/side_profile", locals: { user: @user } %> 
+</div>
+<%= render partial: "toots/display_toots", locals: { toots: @toots } %>

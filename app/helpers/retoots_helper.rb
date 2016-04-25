@@ -6,4 +6,8 @@ module RetootsHelper
     toots = current_user.retoots.where("toot_id = #{toot_id}")
     toots.length > 0
   end
+
+  def isValidRetoot?(toot_id)
+    !hasCurrentUserRetooted?(toot_id) && current_user.toots.where("id = #{toot_id}").length == 0
+  end
 end

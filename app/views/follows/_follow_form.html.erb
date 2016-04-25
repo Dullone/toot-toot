@@ -1,4 +1,4 @@
 <%= form_for Follow.new, url: user_follows_path(current_user) do |f| %>
   <%= hidden_field_tag 'following_id', user.id.to_s  %>
-    <%= f.submit "follow "  + user.username, :class => "follow-button"   %>
+    <%= f.submit "follow ", :class => "follow-button"   %>
 <% end %>
