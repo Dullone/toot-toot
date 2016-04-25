@@ -54,3 +54,4 @@ group :development, :test do
   gem 'faker'
 end
 
+ruby "2.2.1"
