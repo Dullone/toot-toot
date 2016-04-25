@@ -4,5 +4,21 @@
   <% if @user != current_user && @user %>
     <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
   <% end %>
-  <div id="toots-profile">Toots: <%= user.toots.size %> Retoots: <%= user.retoots.size %></div>
+  
+  <table>
+    <tr> 
+      <td>Following </td>
+      <td>Followers </td>
+    </tr>
+      <td><%= user.following.size %></td>
+      <td><%= user.followers.size %></td>
+    <tr>
+      <td>Toots</td>
+      <td>Retoots</td>
+    </tr>
+    <tr>
+      <td><%= user.toots.size %></td>
+      <td><%= user.retoots.size %></td>
+    </tr>
+  </table>
 </div>
