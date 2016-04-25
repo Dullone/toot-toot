@@ -12,12 +12,12 @@
   <% end %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
-  
+
+  <%= render partial: "./users/header" %>
+
   <% flash.each do |key, value|  %>
     <%= content_tag :p, value, class: key %>
   <% end %>
-
-  <%= render partial: "./users/header" %>
 
 
 <div class="container" id="main-container">

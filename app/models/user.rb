@@ -45,16 +45,15 @@ class User < ActiveRecord::Base
 
   def toots_and_retoots_since(time, limit = 20)
     new_retoots = Retoot.where("user_id IN (?) AND created_at > ?", following_ids, time).select("toot_id").limit(limit)
-    Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc) + 
-      Toot.where("id in (?)", new_retoots) + 
-      self.toots.where("created_at > ?", time).limit(limit)
-      
+    (Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc) + 
+               Toot.where("id in (?)", new_retoots) + 
+               self.toots.where("created_at > ?", time).limit(limit)).uniq
   end
 
   def feed(limit = 20)
     user_toots = toots_and_retoots
     following_toots = Toot.where("user_id IN (?)", following_ids)
-    (user_toots + following_toots)[0..limit].sort!{ |f, s| s[:created_at] <=> f[:created_at ]}
+    (user_toots + following_toots)[0..limit].uniq.sort!{ |f, s| s[:created_at] <=> f[:created_at ]}
   end
 
   def getFeedTootsSince(time)
