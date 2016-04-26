@@ -13,8 +13,9 @@ class User < ActiveRecord::Base
   MAX_NAME_LENGTH = 40
   MAX_WEBSITE_LENGTH = 255
   MAX_LOCATION_LENGTH = 255
+  MIN_USERNAME_LENGTH = 3
   #Validations
-  validates :username, length: { minimum: 3, maximum: MAX_USERNAME_LENGTH },
+  validates :username, length: { minimum: MIN_USERNAME_LENGTH, maximum: MAX_USERNAME_LENGTH },
               uniqueness: true
   validates :name, length: { minimum: 2, maximum: MAX_NAME_LENGTH }
   validates :bio, length: { maximum: MAX_BIO_LENGHT }

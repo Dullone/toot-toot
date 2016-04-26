@@ -21,4 +21,25 @@ RSpec.describe Toot, type: :model do
       expect(toot.favorites).to include(favorite)
     end
   end
+
+  describe "parse" do 
+    let(:message) { "@ruby, I like @linux, but not @uu.  @abcdefghijklmnopqrstuvwxyz" }
+
+    it "returns who toot is directed at" do
+      expect(Toot.parse(message)[:directedAt]).to eql "@ruby"
+    end
+
+    it "returns mentions" do 
+      expect(Toot.parse(message)[:mentions]).to include("@linux")
+      expect(Toot.parse(message)[:mentions]).to include("@ruby")
+      expect(Toot.parse(message)[:mentions]).not_to include("like")
+    end
+
+    it "doesn't return mentions with username less than 3" do 
+      expect(Toot.parse(message)[:mentions]).not_to include("@uu")
+    end
+    it "doesn't return mentions with username greater than 20" do 
+      expect(Toot.parse(message)[:mentions]).not_to include("@uu")
+    end
+  end
 end
