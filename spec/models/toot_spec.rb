@@ -39,7 +39,11 @@ RSpec.describe Toot, type: :model do
       expect(Toot.parse(message)[:mentions]).not_to include("@uu")
     end
     it "doesn't return mentions with username greater than 20" do 
+<<<<<<< HEAD
       expect(Toot.parse(message)[:mentions]).not_to include("@@abcdefghijklmnopqrstuvwxyz")
+=======
+      expect(Toot.parse(message)[:mentions]).not_to include("@uu")
+>>>>>>> 446f7e707e824ee81e02b4278b3057b97af8b2e4
     end
   end
 end

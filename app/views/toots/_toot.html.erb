@@ -13,7 +13,15 @@
       </span>
     </div>
 
-    <div class="toot-text"><%= toot.message %></div>
+    <div class="toot-text">
+      <% create_mention_links(toot.message).each do |m| %>
+        <% if m[:type] == :text  %>
+          <%= m[:message] %>
+        <% elsif m[:type] == :link %>
+          <%= link_to m[:message], user_toots_path(m[:user]) %>
+        <% end %>
+      <% end %>
+    </div>
 
     <div class="toot-bottom-bar">
       reply 

@@ -33,6 +33,4 @@ class Toot < ActiveRecord::Base
     end
     parsedToot
   end
-
-
 end

@@ -51,4 +51,4 @@ error = (response) ->
 
 $(document).on "page:change", -> 
   clearUpdateQueue()
-  $(".toots.feed").ready(init)
+  $("#toots-container").ready(init)
