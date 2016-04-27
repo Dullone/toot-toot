@@ -14,11 +14,8 @@
     </div>
 
     <div class="toot-text">
-      <% create_mention_links(toot.message).each do |m| %>
-        <% if m[:type] == :text  %>
-          <%= m[:message] %>
-        <% elsif m[:type] == :link %>
-          <%= link_to m[:message], user_toots_path(m[:user]) %>
+      <%#  All on one line otherwise whitespace creeps in %>
+      <% create_mention_links(toot.message).each do |m| -%><% if m[:type] == :text %><%=m[:message]-%><% elsif m[:type] == :link %><%=link_to m[:message], m[:user_link]-%>
         <% end %>
       <% end %>
     </div>

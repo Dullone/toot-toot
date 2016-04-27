@@ -26,7 +26,7 @@ module TootsHelper
         endIndex = message.index("@" + u) - 1
         messageWithLinks << { message: message[startIndex .. endIndex], type: :text }
         messageWithLinks << { message: message[endIndex + 1 .. endIndex + u.length + 1], 
-                              type: :link, user: user }
+                              type: :link, user_link: user_toots_path(user) }
         startIndex = endIndex + u.length + 2 #includes @ symbol
       end
     end
@@ -36,7 +36,7 @@ module TootsHelper
     if startIndex < message.length - 1
       messageWithLinks << {message: message[startIndex .. -1], type: :text}
     end
-
+    
     messageWithLinks
   end
 
