@@ -23,8 +23,17 @@ class TootsController < ApplicationController
 
   def create
     @toot = current_user.toots.new(message: params[:toot][:message])
+
     if @toot.save
       #saved
+      parsedToot = Toot.parse(@toot.message)
+
+      parsedToot[:mentions].each do |u|
+      user = User.ci_find_by_username u
+      if user
+        @toot.mentions.create user: user
+      end
+    end
       redirect_to user_toots_path
     else
       #error

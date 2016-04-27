@@ -1,7 +1,7 @@
 toot_pending_delete = null
 
 init = () ->
-  $("a.delete-toot").on("click", confirmDelete)
+  $("#toots-container").on("click", "a.delete-toot", confirmDelete)
 
 confirmDelete = (e) ->
   console.log(e)

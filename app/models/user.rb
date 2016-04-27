@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   #toots
   has_many :toots
-  has_many :retoots
+  has_many :retoots, dependent: :destroy
   has_many :retooted, through: :retoots, source: :toot
 
   #folowing
@@ -38,7 +38,9 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_follows, source: :follower
 
   #favorites
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
+  #mentions
+  has_many :mentions, dependent: :destroy
 
   def toots_and_retoots(limit = 20)
     (toots.limit(limit) + retooted.limit(limit))[0...limit]
@@ -66,4 +68,8 @@ class User < ActiveRecord::Base
     Follow.isUserFollowingUser?({ follower_id: self.id, followed_id: user_id })
   end
 
+
+  def self.ci_find_by_username(username)
+    where("lower(username) = ?", username.downcase).first
+  end
 end

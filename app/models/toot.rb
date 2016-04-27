@@ -8,9 +8,11 @@ class Toot < ActiveRecord::Base
   validates :user, presence: true
 
   #favorites
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   #retoot
-  has_many :retoots
+  has_many :retoots, dependent: :destroy
+  #mentions
+  has_many :mentions, dependent: :destroy
 
   def self.parse(message)
     unless message && message.length > 1
@@ -18,13 +20,19 @@ class Toot < ActiveRecord::Base
     end
 
     parsedToot = {}
+    parsedToot[:mentions] = []
     minLength = User::MIN_USERNAME_LENGTH
-    maxLength = User::MAX_USERNAME_LENGTH
+    maxLength = User::MAX_USERNAME_LENGTH + 1 # +1 for @ symbol
+
     if message[0] == '@' #toot directed at a user
       parsedToot[:directedAt] = message.downcase.scan(/^@[a-z_]{#{minLength},#{maxLength}}/).first
     end
-    parsedToot[:mentions] = message.downcase.scan(/@[a-z_]{#{minLength},#{maxLength}}/)
+    mentions = message.downcase.scan(/(?:@)([a-z_]{#{minLength},#{maxLength}})/)
+    mentions.each do |m| #scan gave us an array of arrays as we used capture groups
+      parsedToot[:mentions] << m.first
+    end
     parsedToot
   end
+
 
 end
