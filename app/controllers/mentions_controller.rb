@@ -7,7 +7,7 @@ class MentionsController < ApplicationController
 
     @user = User.friendly.find_by_friendly_id(params[:user_id])
     if @user
-      @mentions = @user.mentions.select(:toot_id)
+      @mentions = @user.mentions.select(:toot_id).limit(20)
       @toots = Toot.where("id IN (?)", @mentions)
     end
   end

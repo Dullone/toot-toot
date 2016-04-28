@@ -39,4 +39,28 @@ class FollowsController < ApplicationController
     redirect_to toots_feed_path
   end
 
+  def following
+    unless User.friendly.exists_by_friendly_id?(params[:user_id])
+      render file: 'public/404.html', status: :not_found
+      return
+    end
+
+    @user = User.friendly.find_by_friendly_id(params[:user_id])
+    if @user
+      @users = @user.following.limit(20)
+    end
+  end
+
+  def followers
+    unless User.friendly.exists_by_friendly_id?(params[:user_id])
+      render file: 'public/404.html', status: :not_found
+      return
+    end
+
+    @user = User.friendly.find_by_friendly_id(params[:user_id])
+    if @user
+      @users = @user.followers.limit(20)
+    end
+  end
+
 end

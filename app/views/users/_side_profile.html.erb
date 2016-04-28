@@ -10,8 +10,8 @@
       <td>Following </td>
       <td>Followers </td>
     </tr>
-      <td><%= user.following.size %></td>
-      <td><%= user.followers.size %></td>
+      <td><%= link_to "#{user.following.size}", user_following_path(user) %></td>
+      <td><%= link_to "#{user.followers.size}", user_followers_path(user) %></td>
     <tr>
       <td>Toots</td>
       <td>Retoots</td>
@@ -19,6 +19,12 @@
     <tr>
       <td><%= user.toots.size %></td>
       <td><%= user.retoots.size %></td>
+    </tr>
+    <tr>
+      <td>Mentions</td>
+    </tr>
+    <tr>
+      <td><%= link_to "#{user.mentions.size}", user_mentions_path(user) %></td>
     </tr>
   </table>
 </div>

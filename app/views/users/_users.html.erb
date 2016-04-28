@@ -1,0 +1,15 @@
+<div class="users-container center-block">
+
+  <div id="user-container">
+    <h2><%= title %></h2>
+    <% users.each do |user| %>
+      <div class="user-container center-block">
+        <%= render partial: "/users/user", locals: { user: user } %>
+        <% if user != current_user %> <br/>
+          <%= render partial: "follows/dynamic_follow_button", locals: { user: user }%>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+</div>
