@@ -1,9 +1,11 @@
 <div class="header">
   <% if user_signed_in? %>
+      <span class="username"><%= current_user.username %></span>
       <%= link_to "sign out",  destroy_user_session_path , method: :delete %> | 
       <%= link_to("edit profile", edit_user_path(current_user) ) %> |
       <%= link_to "my toots", user_toots_path(current_user) %> |
       <%= link_to "feed", toots_feed_path  %> |
+      <%= link_to "metions", user_mentions_path(current_user) %> |
   <% elsif controller_name != "sessions" && action_name != "new" %>
     <%= link_to "sign in",  user_session_path %>
   <% else %>
