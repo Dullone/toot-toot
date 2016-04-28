@@ -1,5 +1,5 @@
 class FollowsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :delete]
 
   def create
     begin #catch error if bad data is sent, and username does not exist
