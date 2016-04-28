@@ -69,10 +69,21 @@ class TootsController < ApplicationController
   end
 
   def newFeedToots
+    response = {}
+    response[:toots] = []
+    response[:is_logged_in] = true
+
+    unless user_signed_in?
+      response[:is_logged_in] = false
+      respond_to do |format|
+        format.json { render json: response }
+      end
+
+      return
+    end
+
     new_toots = current_user.getFeedTootsSince(getLastFeedUpdate)
     setLastFeedUpdate
-
-    response = []
 
     respond_to do |format|
       new_toots.each do |toot|
