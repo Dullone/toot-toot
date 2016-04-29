@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427144222) do
+ActiveRecord::Schema.define(version: 20160429134337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20160427144222) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "toot_replies", force: :cascade do |t|
+    t.integer  "toot_id"
+    t.integer  "reply_toot_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "toot_replies", ["reply_toot_id"], name: "index_toot_replies_on_reply_toot_id", using: :btree
+  add_index "toot_replies", ["toot_id"], name: "index_toot_replies_on_toot_id", using: :btree
+
   create_table "toots", force: :cascade do |t|
     t.text     "message"
     t.integer  "user_id"
@@ -121,5 +131,6 @@ ActiveRecord::Schema.define(version: 20160427144222) do
   add_foreign_key "favorites", "users"
   add_foreign_key "mentions", "toots"
   add_foreign_key "mentions", "users"
+  add_foreign_key "toot_replies", "toots"
   add_foreign_key "toots", "users"
 end

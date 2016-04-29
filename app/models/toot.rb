@@ -13,6 +13,9 @@ class Toot < ActiveRecord::Base
   has_many :retoots, dependent: :destroy
   #mentions
   has_many :mentions, dependent: :destroy
+  #reply
+  has_many :toot_replies
+  has_many :replies, through: :toot_replies, source: :toot
 
   def self.parse(message)
     unless message && message.length > 1
