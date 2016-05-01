@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   get "users/newFeedToots" => "toots#newFeedToots"
 
   resources :users do
-    resources :toots, except:  [:edit, :update]
+    resources :toots, except:  [:edit, :update] do 
+      resources :toot_replies, only: [:create]
+    end
     resources :favorites, only: [:create, :destroy]
     resources :follows, only: [:create, :destroy]
     get "following" => "follows#following"
@@ -19,5 +21,7 @@ Rails.application.routes.draw do
   resources :retoots, only: [:create, :destroy]
 
   get "toots/feed" => "toots#feed"
+
+  get "toot_replies/requestReply" => "toot_replies#requestReply"
 
 end

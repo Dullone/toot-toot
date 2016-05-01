@@ -1,5 +1,6 @@
 class TootsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :feed, :delete]
+  include TootsHelper
   
   def show
     @user = User.friendly.find(params[:user_id])
@@ -22,22 +23,13 @@ class TootsController < ApplicationController
   end
 
   def create
-    @toot = current_user.toots.new(message: params[:toot][:message])
-
-    if @toot.save
-      #saved
-      parsedToot = Toot.parse(@toot.message)
-
-      parsedToot[:mentions].each do |u|
-      user = User.ci_find_by_username u
-      if user
-        @toot.mentions.create user: user
-      end
-    end
-      redirect_to user_toots_path
+    if create_toot(params[:toot][:message], current_user)
+      puts "Toot create success"
     else
-      #error
+      puts "toot create failure"
     end
+      
+    redirect_to user_toots_path
   end
 
   def destroy
@@ -88,7 +80,7 @@ class TootsController < ApplicationController
     respond_to do |format|
       new_toots.each do |toot|
           #us unshift so when we unwind the array on the client, its in the correct order
-          response.unshift(render_to_string partial: "toots/toot", locals: { user: toot.user, toot: toot })
+          response[:toots].unshift(render_to_string partial: "toots/toot", locals: { user: toot.user, toot: toot })
       end
       format.json { render json: response }
     end

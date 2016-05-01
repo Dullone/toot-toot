@@ -1,0 +1,11 @@
+<%= render partial: "/toots/toot_top_info", locals: { toot: toot, user: toot.user }  %>
+<%= render partial: "/toots/toot_body", locals: { toot: toot, user: toot.user }  %>
+
+<div id="toot-reply-form">
+  <%= form_for Toot.new, remote: true, 
+          url: user_toot_toot_replies_path(toot.user, toot) do |f|  %>
+    <div class="field no-margin">
+      <%= f.text_area :message, id: "toot-reply-text" %>
+    </div>
+  <% end %>
+</div>

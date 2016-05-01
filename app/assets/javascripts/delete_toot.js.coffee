@@ -4,7 +4,6 @@ init = () ->
   $("#toots-container").on("click", "a.delete-toot", confirmDelete)
 
 confirmDelete = (e) ->
-  console.log(e)
   e.preventDefault()
   toot_pending_delete = $(this).closest("div.toot-container")
   toot_text = toot_pending_delete.find("div.toot-text").text()

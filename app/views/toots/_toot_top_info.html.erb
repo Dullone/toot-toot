@@ -1,0 +1,11 @@
+<div class="toot-top-info">
+  <span class="name"><%= link_to user.username, user_toots_path(user) %> </span>
+  <span class="username">@<%= user.username %></span> - 
+  <span class="time-ago"  >
+    <% if Time.now - toot.created_at < 1.days  %>
+      <%= time_tag toot.created_at, class: "timeago" %>
+    <% else %>
+      <%= date_distance_in_words_short toot.created_at %>
+    <% end %>
+  </span>
+</div>

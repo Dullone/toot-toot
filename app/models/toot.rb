@@ -14,8 +14,9 @@ class Toot < ActiveRecord::Base
   #mentions
   has_many :mentions, dependent: :destroy
   #reply
-  has_many :toot_replies
-  has_many :replies, through: :toot_replies, source: :toot
+  #has_one :orginal_toot, class_name: "TootReply", foreign_key: "reply_toot_id"
+  has_many :reply_toots, class_name: "TootReply", foreign_key: "toot_id"
+  has_many :replies, through: :reply_toots, source: :reply_toot
 
   def self.parse(message)
     unless message && message.length > 1

@@ -1,0 +1,15 @@
+<div class="toot-bottom-bar">
+  <%= link_to "reply", user_toot_toot_replies_path(toot.user, toot), 
+                class: "replyto-toot", "data-tootid"=> toot.id %>
+  <% if isValidRetoot? toot.id %>
+    <%= link_to "retoot", "javascript:void(0)" , class: "retoot-toot", 
+                                          "data-tootid"=> toot.id %>
+  <% elsif hasCurrentUserRetooted? toot.id %>
+    <span class="retooted">&#8635;</span>
+  <% end %>
+  fav
+  <% if current_user && toot.user_id == current_user.id %>
+    <%= link_to "delete", user_toot_path(current_user, toot.id), 
+                          class: "delete-toot"  %> 
+  <% end %>
+</div>

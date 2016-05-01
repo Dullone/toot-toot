@@ -1,38 +1,11 @@
 <div class="row">
   <div class="toot-container">
-    
-    <div class="toot-top-info">
-      <span class="name"><%= link_to user.username, user_toots_path(user) %> </span>
-      <span class="username">@<%= user.username %></span> - 
-      <span class="time-ago"  >
-        <% if Time.now - toot.created_at < 1.days  %>
-          <%= time_tag toot.created_at, class: "timeago" %>
-        <% else %>
-          <%= date_distance_in_words_short toot.created_at %>
-        <% end %>
-      </span>
-    </div>
 
-    <div class="toot-text">
-      <%#  All on one line otherwise whitespace creeps in %>
-      <% create_mention_links(toot.message).each do |m| -%><% if m[:type] == :text %><%=m[:message]-%><% elsif m[:type] == :link %><%=link_to m[:message], m[:user_link]-%>
-        <% end %>
-      <% end %>
-    </div>
+  <%= render partial: "/toots/toot_top_info", locals: { user: user, toot: toot } %>        
 
-    <div class="toot-bottom-bar">
-      reply 
-      <% if isValidRetoot? toot.id %>
-        <%= link_to "retoot", "javascript:void(0)", class: "retoot-toot", "data-tootid"=> toot.id %>
-      <% elsif hasCurrentUserRetooted? toot.id %>
-        <span class="retooted">&#8635;</span>
-      <% end %>
-      fav
-      <% if current_user && toot.user_id == current_user.id %>
-        <%= link_to "delete", user_toot_path(current_user, toot.id), 
-                              class: "delete-toot"  %> 
-      <% end %>
-    </div>
+  <%= render partial: "/toots/toot_body", locals: { user: user, toot: toot } %>    
+
+  <%= render partial: "/toots/toot_action_bar", locals: { user: user, toot: toot } %>
 
   </div>
 </div>

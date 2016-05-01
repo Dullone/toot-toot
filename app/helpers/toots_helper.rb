@@ -40,4 +40,25 @@ module TootsHelper
     messageWithLinks
   end
 
+  def create_mentions(toot)
+    parsedToot = Toot.parse(toot.message)
+
+    parsedToot[:mentions].each do |u|
+      user = User.ci_find_by_username u
+      if user
+        toot.mentions.create user: user
+      end
+    end
+  end
+
+  def create_toot(message, user)
+    toot = user.toots.new(message: message)
+    if toot.save
+      create_mentions(toot)
+      return toot
+    else
+      return false
+    end
+  end
+
 end
