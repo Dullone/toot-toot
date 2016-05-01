@@ -80,7 +80,10 @@ class TootsController < ApplicationController
     respond_to do |format|
       new_toots.each do |toot|
           #us unshift so when we unwind the array on the client, its in the correct order
-          response[:toots].unshift(render_to_string partial: "toots/toot", locals: { user: toot.user, toot: toot })
+          response[:toots].unshift(render_to_string partial: "toots/toot", locals: { 
+                      user: toot.user, 
+                      toot: toot, 
+                      render_replies_as_single: true })
       end
       format.json { render json: response }
     end

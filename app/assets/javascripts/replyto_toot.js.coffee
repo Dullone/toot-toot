@@ -42,7 +42,8 @@ postReply = (text, url) ->
     type: "POST"
     dataType: "json"
     data:
-      message: text
+      toot:
+        message: text
     success:  newReplySuccess
     error:    newReplyError
 

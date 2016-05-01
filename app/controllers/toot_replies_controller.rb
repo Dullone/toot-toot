@@ -3,7 +3,7 @@ class TootRepliesController < ApplicationController
   include TootsHelper
 
   def create
-    replyToot = create_toot(params[:message], current_user)
+    replyToot = create_toot(params[:toot][:message], current_user)
     orignal_toot = Toot.find_by_id(params[:toot_id])
 
     response = { }
