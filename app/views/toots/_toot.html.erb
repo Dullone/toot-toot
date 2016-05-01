@@ -9,7 +9,7 @@
       <% toot.replies.reverse_each do |toot| %>
         <div class="toot-reply-container">
 
-          <%= render partial: "/toots/toot_content", locals: { user: user, toot: toot } %>
+          <%= render partial: "/toots/toot_content", locals: { user: toot.user, toot: toot } %>
 
         </div>
       <% end %>
