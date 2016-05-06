@@ -4,8 +4,10 @@ init = () ->
 
 showTootPage = (e) ->
   #if clicked on this element or its parent
-  if e.target == this || $(e.target).parent()[0] == this
+  if e.target.nodeName != "A"
     window.location.assign($(this).data('toot-link'));
+
+  console.log(e.target.nodeName)
 
 $(document).on "page:change", -> 
   $(".toots-container").ready(init)
