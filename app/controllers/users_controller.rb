@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  autocomplete :user, :at_username
   
   def usernameAvailable
     username    = User.where(username: params[:username])

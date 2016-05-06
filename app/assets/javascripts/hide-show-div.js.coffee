@@ -26,5 +26,5 @@ $(document).on "page:change", ->
       0:
         colapse: $('#new-toot-colapse'),
         expand: $('#toot-form'),
-        monitor: $('#toot-form textarea')
+        monitor: $('#toot_message')
   )

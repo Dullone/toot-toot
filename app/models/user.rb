@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: :slugged
+  before_save :add_at_username
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -72,4 +73,10 @@ class User < ActiveRecord::Base
   def self.ci_find_by_username(username)
     where("lower(username) = ?", username.downcase).first
   end
+
+  private
+    def add_at_username
+      self.at_username = "@" + self.username
+    end
+
 end

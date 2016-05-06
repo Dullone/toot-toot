@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get "following" => "follows#following"
     get "followers" => "follows#followers"
     resources :mentions, only: [:index]
+    get :autocomplete_user_at_username, :on => :collection
   end
 
   resources :retoots, only: [:create, :destroy]

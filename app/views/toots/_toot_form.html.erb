@@ -6,7 +6,9 @@
     <div id="toot-form">
     <%= form_for(Toot.new, remote: true, url: user_toots_path(current_user)) do |f| %>
       <div class="field no-margin">
-        <%= f.text_area :message %>
+        <%= f.text_area :message, 'data-autocomplete' => autocomplete_user_at_username_users_path,
+              class: "ui-autocomplete-input", :autocomplete => 'off',
+              'data-delimiter' => ' ', :multiple => "multiple" %>
       </div>
       <div>
         <%= f.submit "Toot" %>

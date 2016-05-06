@@ -19,4 +19,6 @@
 //= require jquery.timeago
 //- require sweet-alert-confirm
 //= require sweetalert
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
 //= require_tree .

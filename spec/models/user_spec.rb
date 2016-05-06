@@ -50,6 +50,10 @@ RSpec.describe User, type: :model do
       user.name = "j" * 41
       expect(user.save).to eql false
     end
+    it "has at_username" do 
+      user.save
+      expect(user.at_username).to eql ('@' + user.username)
+    end
   end
 
   describe "follows" do 

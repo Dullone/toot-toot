@@ -28,6 +28,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem "jquery-ui-rails"
 gem "sweet-alert"
+gem 'rails-jquery-autocomplete'
 source 'https://rails-assets.org' do
   gem 'rails-assets-sweetalert' 
 end

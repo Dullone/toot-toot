@@ -1,9 +1,7 @@
 init = () ->
-  console.log("replyjs init")
   $("#toots-container").on("click", "a.replyto-toot", replytoToot)
 
 replytoToot = (e) ->
-  console.log("reply clicked")
   e.preventDefault()
   requestTootReply(e.target.href, $(e.target).data("tootid"))
 
@@ -20,7 +18,6 @@ requestTootReply = (path, data) ->
   $.ajax(request)
 
 showReplyForm = (response) ->
-  console.log(response)
   if response.isReplyOk
     swal {
       title: "Toot reply"
@@ -33,10 +30,9 @@ showReplyForm = (response) ->
       if isConfirm
         postReply($("#toot-reply-text").val(), $("#toot-reply-text").closest(".new_toot").attr('action'))
 
-postReply = (text, url) ->
-  console.log(text)
-  console.log(url)
+    $('#toot-reply-text').railsAutocomplete()
 
+postReply = (text, url) ->
   request =
     url: url
     type: "POST"
