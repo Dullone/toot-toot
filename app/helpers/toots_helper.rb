@@ -23,15 +23,15 @@ module TootsHelper
     parsedToot[:mentions].each do |u|
       user = User.ci_find_by_username u 
       if user 
-        endIndex = message.index("@" + u) - 1
-        messageWithLinks << { message: message[startIndex .. endIndex], type: :text }
+        endIndex = message.downcase.index("@" + u) - 1
+        if endIndex > 0 #make sure we aren't at toot begining
+          messageWithLinks << { message: message[startIndex .. endIndex], type: :text }
+        end
         messageWithLinks << { message: message[endIndex + 1 .. endIndex + u.length + 1], 
                               type: :link, user_link: user_toots_path(user) }
         startIndex = endIndex + u.length + 2 #includes @ symbol
       end
     end
-
-    puts "startIndex: " + startIndex.to_s + "messege length: " + message.length.to_s
 
     if startIndex < message.length - 1
       messageWithLinks << {message: message[startIndex .. -1], type: :text}

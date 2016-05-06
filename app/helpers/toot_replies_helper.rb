@@ -8,10 +8,7 @@ module TootRepliesHelper
   end
 
   def toot_is_reply?(toot)
-    if TootReply.where("reply_toot_id = ?", toot.id).length > 0
-      return true
-    end
-    false
+    TootReply.toot_is_reply?(toot.id)
   end
 
 end
