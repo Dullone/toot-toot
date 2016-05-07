@@ -22,9 +22,11 @@
     </tr>
     <tr>
       <td>Mentions</td>
+      <td>Favorites</td>
     </tr>
     <tr>
       <td><%= link_to "#{user.mentions.size}", user_mentions_path(user) %></td>
+      <td><%= link_to "#{user.favorites.size}", user_favorites_path(user) %></td>
     </tr>
   </table>
 </div>

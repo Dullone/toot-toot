@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :toots, except:  [:edit, :update] do 
       resources :toot_replies, only: [:create]
     end
-    resources :favorites, only: [:create, :destroy]
+    resources :favorites, only: [:create, :destroy, :index]
     resources :follows, only: [:create, :destroy]
     get "following" => "follows#following"
     get "followers" => "follows#followers"
