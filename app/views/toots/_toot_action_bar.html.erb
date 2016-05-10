@@ -1,9 +1,13 @@
 <div class="toot-bottom-bar">
+
+  <%# -------Reply-------- %>
   <% unless toot_is_reply?(toot) %>
     <%= link_to "reply", user_toot_toot_replies_path(toot.user, toot), 
                   class: "replyto-toot", "data-tootid"=> toot.id %>
   <% end %>
 
+
+  <%# -------Retoot-------- %>
   <% if isValidRetoot? toot.id %>
     <%= link_to "retoot", "javascript:void(0)" , class: "retoot-toot", 
                                           "data-tootid"=> toot.id %>
@@ -11,8 +15,27 @@
     <span class="retooted">&#8635;</span>
   <% end %>
   
-  fav
+  <%# -------Favorites-------- %>
+  <% unfav_url = "" %>
+  <% if current_user && current_user.favorite_toots.include?(toot) %>
+    <% favorite_text = "unfav" %>
+    <% is_favorite = true %>
+    <% unfav_url = user_favorite_path(current_user, 
+                   current_user.favorites.where(toot: toot)[0]) %>
+  <% elsif user_signed_in? %>
+    <% favorite_text = "fav" %>
+    <% is_favorite = false %>
+  <% else %>
+    <% favorite_text = "" %> 
+  <% end %>
+  <% if favorite_text != "" %>
+    <%= link_to favorite_text, "javascript:void(0)" , class: "favorite-toot", 
+                    "data-favorite"=>is_favorite, "data-tootid"=> toot.id,
+                    "data-unfav-url"=>unfav_url,
+                    "data-fav-url"=>user_favorites_path(current_user) %>
+  <% end %>
 
+  <%# ------Delete-------- %>
   <% if current_user && toot.user_id == current_user.id %>
     <%= link_to "delete", user_toot_path(current_user, toot.id), 
                           class: "delete-toot"  %> 

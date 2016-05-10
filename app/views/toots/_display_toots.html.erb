@@ -3,9 +3,22 @@
     <%= render partial: "toots/toot_form" %>
   <% end %>
 
+  <%# -----------display options---------  %>
+  <% options = { show_all_replies: false, 
+                 render_replies_as_single: false, 
+                 show_replies: true } %>
+  <% if defined? show_all_replies %> 
+    <% options[:show_all_replies] = show_all_replies %>
+  <% else %>
+    <% unless user_signed_in? then options[:show_all_replies] = true end %>
+  <% end %>
+  <% if defined? render_replies_as_single %>  
+    <% options[:render_replies_as_single] = render_replies_as_single %>
+  <% end %>
+
   <div id="toots-container">
     <% toots.each do |toot| %>
-      <%= render partial: "toots/toot", locals: { toot: toot } %>
+      <%= render partial: "toots/toot", locals: { toot: toot, options: options } %>
     <% end %>
   </div>
   

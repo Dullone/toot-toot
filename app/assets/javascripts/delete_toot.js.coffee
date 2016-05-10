@@ -6,7 +6,8 @@ init = () ->
 confirmDelete = (e) ->
   e.preventDefault()
   toot_pending_delete = $(this).closest("div.toot-container")
-  toot_text = toot_pending_delete.find("div.toot-text").text()
+  toot_text = toot_pending_delete.find("div.toot-text").first().text()
+  console.log(toot_text)
 
   swal {
       title: "Delete toot?"

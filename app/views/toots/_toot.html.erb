@@ -1,14 +1,17 @@
 <div class="row">
+  <% options ||= {} %>
 
   <% if !toot_is_reply?(toot) %>
     <div class="toot-container" data-toot-link="<%= user_toot_path(toot.user, toot.id) %>">
       
         <%= render partial: "/toots/toot_content", locals: { toot: toot } %>
     
-    <% if toot_has_reply?(toot) %>
-      <% show_all_replies ||= false  %>
+    <% if toot_has_reply?(toot) && options[:show_replies] %>
+      <% options[:show_all_replies] ||= false  %>
       <% toot.replies.reverse_each do |toot| %>
-        <% if show_all_replies || current_user.following.include?(toot.user) || toot.user == current_user %>
+        <% if options[:show_all_replies] || current_user &&
+                ( current_user.following.include?(toot.user) || 
+                  toot.user == current_user) %>
           <div class="toot-reply-container">
 
             <%= render partial: "/toots/toot_content", locals: { toot: toot } %>
@@ -19,7 +22,7 @@
     <% end %>
 
     </div>
-  <% elsif defined?(render_replies_as_single) && render_replies_as_single == true %>
+  <% elsif defined?(options) && options[:render_replies_as_single]== true %>
     <div class="toot-container">
       <div class="toot-reply-container">
         <%= render partial: "/toots/toot_content", locals: { toot: toot } %>

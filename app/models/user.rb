@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   #favorites
   has_many :favorites, dependent: :destroy
   has_many :favorite_toots, through: :favorites, source: :toot
+  
   #mentions
   has_many :mentions, dependent: :destroy
 
