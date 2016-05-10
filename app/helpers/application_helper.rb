@@ -1,6 +1,7 @@
 module ApplicationHelper
   include RetootsHelper
   include TootsHelper
+  include TootRepliesHelper
   
   def login_required
     "login required"

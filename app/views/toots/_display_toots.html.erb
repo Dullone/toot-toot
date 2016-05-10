@@ -15,6 +15,9 @@
   <% if defined? render_replies_as_single %>  
     <% options[:render_replies_as_single] = render_replies_as_single %>
   <% end %>
+  <% if defined? show_replies %> 
+    <% options[:show_replies] = show_replies %>
+  <% end %>
 
   <div id="toots-container">
     <% toots.each do |toot| %>

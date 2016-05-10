@@ -11,4 +11,14 @@ module TootRepliesHelper
     TootReply.toot_is_reply?(toot.id)
   end
 
+  def original_toot(toot)
+    reply = TootReply.where("reply_toot_id = ?", toot.id)
+    original = nil
+    if reply.length > 0
+      original =  Toot.find(reply.first.toot_id)
+    end
+
+    original
+  end
+
 end

@@ -1,1 +1,4 @@
-<%= render partial: "/toots/toot", locals: { toot: @toot } %>
+<%= render partial: "/toots/display_toots", locals: { toots:[@toot],
+                    render_replies_as_single: true,
+                    show_replies: true,
+                    show_all_replies: true } %>

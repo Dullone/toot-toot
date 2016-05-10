@@ -1,3 +1,6 @@
-<div class="toots-container">
-  <%= render partial: "toots/toot", collection: @toots, as: :toot, locals: { render_replies_as_single: true } %>
+<div class="col-md-3">
+    <%= render partial: "users/side_profile", locals: { user: @user } %> 
 </div>
+<%= render partial: "toots/display_toots", locals: { toots: @toots, 
+                                    render_replies_as_single: true,
+                                    show_replies: false } %>
