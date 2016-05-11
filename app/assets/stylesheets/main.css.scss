@@ -160,6 +160,14 @@ body{
   height: 50px;
 }
 
+.page-title{
+  font-size: 24px;
+  background: #fff;
+  @include rounded-corners;
+  margin: 15px;
+  padding: 20px 0 20px 20px;
+}
+
 ul.ui-front{
   z-index: 100000;
 }

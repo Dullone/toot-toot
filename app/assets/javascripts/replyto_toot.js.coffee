@@ -6,7 +6,6 @@ replytoToot = (e) ->
   requestTootReply(e.target.href, $(e.target).data("tootid"))
 
 requestTootReply = (path, data) ->
-  console.log(data)
   request =
     url: "/toot_replies/requestReply"
     dataType: "json"
@@ -28,9 +27,16 @@ showReplyForm = (response) ->
       html: true
     }, (isConfirm) ->
       if isConfirm
-        postReply($("#toot-reply-text").val(), $("#toot-reply-text").closest(".new_toot").attr('action'))
+        postReply($('#toot-reply-text').val(), $('#toot-reply-text').closest(".new_toot").attr('action'))
 
     $('#toot-reply-text').railsAutocomplete()
+    console.log($('#toot-reply-text').val())
+    setFocusAndMoveCursorToEnd($('#toot-reply-text'))
+
+setFocusAndMoveCursorToEnd = ($element) ->
+    $element.focus()
+    len = $element.val().length * 2
+    $element[0].setSelectionRange(len, len)
 
 postReply = (text, url) ->
   request =

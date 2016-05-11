@@ -8,7 +8,10 @@
       <%= f.text_area :message, 'data-autocomplete' => autocomplete_user_at_username_users_path,
               class: "ui-autocomplete-input", :autocomplete => 'off',
               'data-delimiter' => ' ', :multiple => "multiple",
-              id: "toot-reply-text"%>
+              id: "toot-reply-text", 
+              autofocus: true,
+              maxlength: 140,
+              :value => toot.user.at_username + " " %>
     </div>
   <% end %>
 </div>

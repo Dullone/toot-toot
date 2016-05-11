@@ -14,7 +14,7 @@
                   reply.user == current_user) %>
           <div class="toot-reply-container">
 
-            <%= render partial: "/toots/toot_content", locals: { toot: toot } %>
+            <%= render partial: "/toots/toot_content", locals: { toot: reply } %>
 
           </div>
         <% end %>

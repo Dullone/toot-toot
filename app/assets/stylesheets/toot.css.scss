@@ -27,6 +27,11 @@
 .username, .time-ago{
   color: #777;
 }
+
+#toot-reply-text{
+  width: 380px;
+  height: 100px;
+}
 #retweet{
   left: 0;
   width: 16px;

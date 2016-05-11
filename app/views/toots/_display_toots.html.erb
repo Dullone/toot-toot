@@ -1,5 +1,6 @@
 <div class="toots-container col-md-6 center-block">
-  <% if user_signed_in?  %>
+  <% hide_toot_form ||= false %>
+  <% if user_signed_in? && !hide_toot_form %>
     <%= render partial: "toots/toot_form" %>
   <% end %>
 
