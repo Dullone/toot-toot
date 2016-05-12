@@ -23,7 +23,12 @@ class TootsController < ApplicationController
   end
 
   def create
-    if create_toot(params[:toot][:message], current_user)
+    message = params[:toot][:message]
+    if params[:toot][:message].is_a?(Array)
+      message =  message.first
+    end
+
+    if create_toot(message, current_user)
       puts "Toot create success"
     else
       puts "toot create failure"

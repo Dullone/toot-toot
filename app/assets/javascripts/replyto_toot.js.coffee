@@ -5,6 +5,16 @@ replytoToot = (e) ->
   e.preventDefault()
   requestTootReply(e.target.href, $(e.target).data("tootid"))
 
+enterSubmit = (e) ->
+  console.log("enterSubmit reply")
+  if e.which && e.which == 13 || e.keyCode && e.keyCode == 13
+    e.preventDefault()
+    sweeAlertConfirm()
+
+sweeAlertConfirm = () ->
+  $(".sweet-alert").find("button.confirm")[0].click()
+  console.log("sa confirm")
+
 requestTootReply = (path, data) ->
   request =
     url: "/toot_replies/requestReply"
@@ -30,8 +40,8 @@ showReplyForm = (response) ->
         postReply($('#toot-reply-text').val(), $('#toot-reply-text').closest(".new_toot").attr('action'))
 
     $('#toot-reply-text').railsAutocomplete()
-    console.log($('#toot-reply-text').val())
     setFocusAndMoveCursorToEnd($('#toot-reply-text'))
+    $('.new_toot').on("keypress", enterSubmit)
 
 setFocusAndMoveCursorToEnd = ($element) ->
     $element.focus()

@@ -7,7 +7,6 @@ confirmDelete = (e) ->
   e.preventDefault()
   toot_pending_delete = $(this).closest("div.toot-container")
   toot_text = toot_pending_delete.find("div.toot-text").first().text()
-  console.log(toot_text)
 
   swal {
       title: "Delete toot?"
@@ -23,7 +22,6 @@ confirmDelete = (e) ->
         deleteToot(e.target.href)
 
 deleteToot = (path) ->
-  console.log(path)
   sendDeleteRequest(path)
 
 sendDeleteRequest = (path) ->
@@ -37,13 +35,11 @@ sendDeleteRequest = (path) ->
   $.ajax(request)
 
 delete_complete = () ->
-  console.log("delete complete")
   toot_pending_delete.remove()
   toot_pending_delete = null
 
 delete_error = (e) ->
   console.log("delete error")
-  console.log(e)
 
 $(document).on "page:change", -> 
   $(".toots-container").ready(init)
