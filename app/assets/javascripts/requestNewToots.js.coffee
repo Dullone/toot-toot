@@ -4,7 +4,7 @@ $tootsContainer = null
 newToots        = 0
 updateRequestTimer = null
 intialRequestInterval = 2000 #2 seconds
-requestIntervalLong = 3000000 #1/2 minute
+requestIntervalLong = 30000 #1/2 minute
 requestPending = false
 is_logged_in = true #assume logged until proven false
 

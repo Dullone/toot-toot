@@ -7,8 +7,13 @@ init = () ->
   $toot_form.on("ajax:error",     tootSumbitError)
   $toot_form.on("ajax:complete",  onSumbitComplete)
   $toot_form.on("submit",         onSumbit)
-  $toot_form.on("keypress",       enterSubmit)
+  $toot_form.on("keypress",       onKeyPress)
 
+
+onKeyPress = (e) ->
+  enterSubmit(e)
+  if checkIfValidToot
+    clearError()
 
 enterSubmit = (e) ->
   #check if enter was pressed, submit form if it was
@@ -34,6 +39,9 @@ setError = (errorText) ->
   $toot_form.find('.warning').text(errorText)
 
 onSumbit = (e) ->
+  unless checkIfValidToot()
+    e.preventDefault()
+    return false
   disableForm(true)
   submitPending = true
   showWaitingDiv(true)
@@ -43,6 +51,12 @@ onSumbitComplete = () ->
   submitPending = false
   showWaitingDiv(false)
 
+checkIfValidToot = () ->
+  if $toot_form.find("textarea").val().length < 2
+    setError("Toot too short")
+    return false
+
+  return true
 
 disableForm = (disable) ->
   if disable
