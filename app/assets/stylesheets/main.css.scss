@@ -130,6 +130,10 @@ body{
   margin-top: -30px;
 }
 
+.warning{
+  color: #ff3333;
+}
+
 #side-profile{
   background-color: #fff;
   @include rounded-corners;

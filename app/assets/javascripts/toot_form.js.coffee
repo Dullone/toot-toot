@@ -22,19 +22,36 @@ tootSumbitSuccess = (e, data, status, xhr) ->
   getNewToots()
   $toot_form.find("input[type=text], textarea").val("")
   $toot_form.find("textarea").blur()
+  clearError()
 
 tootSumbitError = (e, data, status, xhr) ->
-  console.log("error submitting toot")
+  setError('error submitting toot')
+
+clearError = () ->
+  $toot_form.find('.warning').text('')
+
+setError = (errorText) ->
+  $toot_form.find('.warning').text(errorText)
 
 onSumbit = (e) ->
-  $("#new_toot :submit").attr("disabled", true)
+  disableForm(true)
   submitPending = true
   showWaitingDiv(true)
 
 onSumbitComplete = () ->
-  $("#new_toot :submit").attr("disabled", false)
+  disableForm(false)
   submitPending = false
   showWaitingDiv(false)
+
+
+disableForm = (disable) ->
+  if disable
+    $("#new_toot :submit").attr("disabled", true)
+    $toot_form.find("textarea").blur()
+    #$toot_form.find("textarea").attr("disabled", true)
+  else
+    $("#new_toot :submit").attr("disabled", false)
+    #$toot_form.find("textarea").attr("disabled", false)
 
 showWaitingDiv = (show) ->
   if show
