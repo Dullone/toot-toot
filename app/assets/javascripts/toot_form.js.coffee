@@ -29,10 +29,20 @@ tootSumbitError = (e, data, status, xhr) ->
 onSumbit = (e) ->
   $("#new_toot :submit").attr("disabled", true)
   submitPending = true
+  showWaitingDiv(true)
 
 onSumbitComplete = () ->
   $("#new_toot :submit").attr("disabled", false)
   submitPending = false
+  showWaitingDiv(false)
+
+showWaitingDiv = (show) ->
+  if show
+    visibility = 'visible'
+  else
+    visibility = 'hidden'
+
+  $toot_form.find('#waitingCircleG').css('visibility', visibility);
 
 $(document).on "page:change", -> 
   $("#new_toot").ready(init)

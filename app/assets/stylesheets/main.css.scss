@@ -160,3 +160,13 @@ body{
 ul.ui-front{
   z-index: 100000;
 }
+
+.toot-bottom-bar{
+  font-weight: 600;
+  font-size: 14px;
+  padding: 2px 0;
+  a{
+    padding: 0 3px 0 0;
+    color: #97999B;
+  }
+}
