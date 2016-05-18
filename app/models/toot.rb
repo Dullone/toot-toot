@@ -4,7 +4,9 @@ class Toot < ActiveRecord::Base
   belongs_to :user
 
   #validations
-  validates :message, length: { minimum: 2, maximum: 140 }
+  MIN_LENGTH = 2
+  MAX_LENGTH = 140
+  validates :message, length: { minimum: MIN_LENGTH, maximum: MAX_LENGTH }
   validates :user, presence: true
 
   #favorites

@@ -51,10 +51,23 @@ module TootsHelper
     end
   end
 
+  def create_tags(toot)
+    hasthtags = toot.message.downcase.scan(/(?:#)([a-z_]{#{Tag::MIN_LENGTH},#{Tag::MAX_LENGTH}})/)
+    
+    hasthtags.each do  |tag|
+      thisTag = Tag.find_by_tag(tag)
+      unless thisTag #if tag doesn't exit, create it
+        thisTag = Tag.create(tag: tag)
+      end
+      Tagged.create(tag: thisTag, toot: toot)
+    end
+  end
+
   def create_toot(message, user)
     toot = user.toots.new(message: message)
     if toot.save
       create_mentions(toot)
+      create_tags(toot)
       return toot
     else
       return false

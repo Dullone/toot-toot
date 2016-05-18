@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505234151) do
+ActiveRecord::Schema.define(version: 20160518052833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,24 @@ ActiveRecord::Schema.define(version: 20160505234151) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "taggeds", force: :cascade do |t|
+    t.integer  "tag_id",     null: false
+    t.integer  "toot_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "taggeds", ["tag_id"], name: "index_taggeds_on_tag_id", using: :btree
+  add_index "taggeds", ["toot_id"], name: "index_taggeds_on_toot_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "tag",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tags", ["tag"], name: "index_tags_on_tag", using: :btree
+
   create_table "toot_replies", force: :cascade do |t|
     t.integer  "toot_id"
     t.integer  "reply_toot_id"
@@ -132,6 +150,8 @@ ActiveRecord::Schema.define(version: 20160505234151) do
   add_foreign_key "favorites", "users"
   add_foreign_key "mentions", "toots"
   add_foreign_key "mentions", "users"
+  add_foreign_key "taggeds", "tags"
+  add_foreign_key "taggeds", "toots"
   add_foreign_key "toot_replies", "toots"
   add_foreign_key "toots", "users"
 end

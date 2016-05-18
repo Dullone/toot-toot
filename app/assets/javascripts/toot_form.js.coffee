@@ -55,7 +55,6 @@ checkIfValidToot = () ->
   if $toot_form.find("textarea").val().length < 2
     setError("Toot too short")
     return false
-
   return true
 
 disableForm = (disable) ->
