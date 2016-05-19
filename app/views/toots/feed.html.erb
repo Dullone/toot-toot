@@ -1,4 +1,8 @@
 <div class="col-md-3">
     <%= render partial: "users/side_profile", locals: { user: @user } %> 
+    <div class="generic-container col-md-12">
+      <h4>Treding tags</h4>
+      <div>#<%= Tag.first.tag %></div>
+    </div>
 </div>
 <%= render partial: "toots/display_toots", locals: { toots: @toots } %>
