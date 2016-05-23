@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :retoots, only: [:create, :destroy]
+  resources :tags, only: [:show]
 
   get "toots/feed" => "toots#feed"
 

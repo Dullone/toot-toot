@@ -16,37 +16,52 @@ module TootsHelper
   end
 
   #def create_mention_links(message)
-  #  parsedToot = Toot.parse(message)
-  #  messageWithLinks = []
-#
-  #  startIndex = 0
-  #  parsedToot[:mentions].each do |u|
-  #    user = User.ci_find_by_username u 
-  #    if user 
-  #      endIndex = message.downcase.index("@" + u) - 1
-  #      if endIndex > 0 #make sure we aren't at toot begining
-  #        messageWithLinks << { message: message[startIndex .. endIndex], type: :text }
-  #      end
-  #      messageWithLinks << { message: message[endIndex + 1 .. endIndex + u.length + 1], 
-  #                            type: :link, link: user_toots_path(user) }
-  #      startIndex = endIndex + u.length + 2 #includes @ symbol
-  #    end
-  #  end
-#
-  #  if startIndex < message.length - 1
-  #    messageWithLinks << {message: message[startIndex .. -1], type: :text}
-  #  end
-  #  
-  #  messageWithLinks
+    #  parsedToot = Toot.parse(message)
+    #  messageWithLinks = []
+    #
+    #  startIndex = 0
+    #  parsedToot[:mentions].each do |u|
+    #    user = User.ci_find_by_username u 
+    #    if user 
+    #      endIndex = message.downcase.index("@" + u) - 1
+    #      if endIndex > 0 #make sure we aren't at toot begining
+    #        messageWithLinks << { message: message[startIndex .. endIndex], type: :text }
+    #      end
+    #      messageWithLinks << { message: message[endIndex + 1 .. endIndex + u.length + 1], 
+    #                            type: :link, link: user_toots_path(user) }
+    #      startIndex = endIndex + u.length + 2 #includes @ symbol
+    #    end
+    #  end
+    #
+    #  if startIndex < message.length - 1
+    #    messageWithLinks << {message: message[startIndex .. -1], type: :text}
+    #  end
+    #  
+    #  messageWithLinks
   #end
+
+
+  def add_links_to_toot(text)
+    add_username_links(text)
+    add_tag_links(text)
+  end
 
   def add_username_links(text)
     minLength = User::MIN_USERNAME_LENGTH
     maxLength = User::MAX_USERNAME_LENGTH + 1 # +1 for @ symbol
-    usernames = text.downcase.scan(/@[a-z_]{#{minLength},#{maxLength}}/)
+    usernames = text.scan(/@[a-z_]{#{minLength},#{maxLength}}/i)
     usernames.uniq!
     usernames.each do |username|
       text.gsub!(username, username_link(username))
+    end
+    text
+  end
+
+  def add_tag_links(text)
+    tags = text.scan(/#[a-z_]{#{Tag::MIN_LENGTH},#{Tag::MAX_LENGTH}}/i)
+    tags.each do  |tag|
+      #debugger
+      text.gsub!(tag, tag_link(tag))
     end
     text
   end
@@ -58,6 +73,14 @@ module TootsHelper
       return link_to at_username, user_path(username)
     end
     at_username
+  end
+
+  def tag_link(tag)
+    hash_tag = Tag.find_by_tag(tag)
+    if hash_tag
+      return link_to hash_tag.tag, tag_path(hash_tag)
+    end
+    tag
   end
 
   def create_mentions(toot)
@@ -72,7 +95,7 @@ module TootsHelper
   end
 
   def create_tags(toot)
-    hasthtags = toot.message.downcase.scan(/(?:#)([a-z_]{#{Tag::MIN_LENGTH},#{Tag::MAX_LENGTH}})/)
+    hasthtags = toot.message.downcase.scan(/#[a-z_]{#{Tag::MIN_LENGTH},#{Tag::MAX_LENGTH}}/)
     
     hasthtags.each do  |tag|
       thisTag = Tag.find_by_tag(tag)
