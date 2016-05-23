@@ -4,7 +4,7 @@
       <h4>Treding tags</h4>
       <div>
         <% Tag.limit(5).each do |tag| %>
-          <%= tag.tag %><br/>
+          <%= link_to tag.tag, tag_path(tag) %><br/>
         <% end  %>
       </div>
     </div>
