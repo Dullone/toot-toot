@@ -49,10 +49,9 @@ module TootsHelper
   def add_username_links(text)
     minLength = User::MIN_USERNAME_LENGTH
     maxLength = User::MAX_USERNAME_LENGTH + 1 # +1 for @ symbol
-    usernames = text.scan(/@[a-z_]{#{minLength},#{maxLength}}/i)
-    usernames.uniq!
+    usernames = text.scan(/@[a-z_]{#{minLength},#{maxLength}}/i) #/i case insensitive
     usernames.each do |username|
-      text.gsub!(username, username_link(username))
+      text.gsub!(/#{username}\b/, username_link(username))
     end
     text
   end
@@ -60,8 +59,7 @@ module TootsHelper
   def add_tag_links(text)
     tags = text.scan(/#[a-z_]{#{Tag::MIN_LENGTH},#{Tag::MAX_LENGTH}}/i)
     tags.each do  |tag|
-      #debugger
-      text.gsub!(tag, tag_link(tag))
+      text.gsub!(/#{tag}\b/, tag_link(tag))
     end
     text
   end

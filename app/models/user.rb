@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     where("lower(username) = ?", username.downcase).first
   end
 
+  def username_and_name
+    self.at_username #+ ", " + self.name
+  end
+
   private
     def add_at_username
       self.at_username = "@" + self.username

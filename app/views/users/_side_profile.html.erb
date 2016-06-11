@@ -4,6 +4,16 @@
   <% if @user != current_user && @user %>
     <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
   <% end %>
+
+  <% if user.bio %>
+    <div class="mini-profile">
+      <% miniProfileMaxLength = 100 %>
+      <%= user.bio[0..miniProfileMaxLength] %>
+      <% if user.bio.length > miniProfileMaxLength  %>
+        <%= link_to("...", "javascript:void(0)" ) %>
+      <% end %>
+    </div>
+  <% end %>
   
   <table>
     <tr> 

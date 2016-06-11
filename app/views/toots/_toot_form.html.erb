@@ -9,6 +9,7 @@
         <%= f.text_area :message, 'data-autocomplete' => autocomplete_user_at_username_users_path,
               class: "ui-autocomplete-input", :autocomplete => 'off',
               'data-delimiter' => ' ', :multiple => "multiple", 
+              'data-auto-focus' => true,
               maxlength: 140  %>
       </div>
       <div id="waitingCircleG">

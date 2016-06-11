@@ -17,6 +17,7 @@ $dark-blue: #0084B4;
 $light-blue: #4DA9CA;
 $dark-red: #b30000;
 $light-red: #ff8566;
+$grey: #777;
 
 input[type=submit]{
   appearance: none;
@@ -50,10 +51,6 @@ body{
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
-
-.user-container{
-
 }
 
 .main-container{
@@ -173,4 +170,25 @@ ul.ui-front{
     padding: 0 3px 0 0;
     color: #97999B;
   }
+}
+
+.mini-profile{
+  margin: 0 0 10px 0;
+}
+.profile-field{
+  padding: 7px 0;
+}
+.profile-label{
+  font-weight: bold;
+}
+
+#user-search{
+  float: right;
+  margin-right: 30px;
+  color: $grey;
+}
+#q{
+  height: 23px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
 }

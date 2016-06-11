@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  autocomplete :user, :at_username
+autocomplete :user, :at_username, display_value: :username_and_name, extra_data: [:name]
   
   def usernameAvailable
     username    = User.where(username: params[:username])
@@ -20,6 +20,14 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+  end
+
+  def show
+    begin
+      @user = User.friendly.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render file: 'public/404.html', status: :not_found
+    end
   end
 
   def edit

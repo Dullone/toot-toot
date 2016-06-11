@@ -12,4 +12,10 @@
     <%= "not signed in" %>
   <% end %>
   <%= link_to "users", users_path %>
+  <div id="user-search">
+    <%= form_tag("/search", method: "get") do %>
+      <%= label_tag "search" %>
+      <%= text_field_tag :q %>
+    <% end %>
+  </div>
 </div>
