@@ -15,9 +15,13 @@ class User < ActiveRecord::Base
   MAX_WEBSITE_LENGTH = 255
   MAX_LOCATION_LENGTH = 255
   MIN_USERNAME_LENGTH = 3
+  VALID_USERNAME_CHARACTERS = "[a-zA-Z_0-9]"
   #Validations
   validates :username, length: { minimum: MIN_USERNAME_LENGTH, maximum: MAX_USERNAME_LENGTH },
               uniqueness: true
+  validates_format_of :username, :with => /\A#{VALID_USERNAME_CHARACTERS}+\z/,
+                      :message => "Only letters, numbers or underscore allowed"
+
   validates :name, length: { minimum: 2, maximum: MAX_NAME_LENGTH }
   validates :bio, length: { maximum: MAX_BIO_LENGHT }
   validates :website, length: { maximum: MAX_WEBSITE_LENGTH }

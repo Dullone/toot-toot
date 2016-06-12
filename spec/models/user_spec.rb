@@ -22,6 +22,10 @@ RSpec.describe User, type: :model do
       user.username = "k" * 21
       expect(user.save).to eql false
     end
+    it "username can't contain invalid characters" do 
+      user.username = "@meyou"
+      expect(user.save).to eql false
+    end
     it "cant' have a bio longer than 500" do 
       user.bio = "k" * 501
       expect(user.save).to eql false

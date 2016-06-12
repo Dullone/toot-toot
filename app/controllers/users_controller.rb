@@ -24,7 +24,7 @@ autocomplete :user, :at_username, display_value: :username_and_name, extra_data:
 
   def show
     begin
-      @user = User.friendly.find(params[:id])
+      @user = User.friendly.find(params[:id].downcase)
     rescue ActiveRecord::RecordNotFound
       render file: 'public/404.html', status: :not_found
     end

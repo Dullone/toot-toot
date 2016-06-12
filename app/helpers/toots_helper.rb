@@ -49,7 +49,7 @@ module TootsHelper
   def add_username_links(text)
     minLength = User::MIN_USERNAME_LENGTH
     maxLength = User::MAX_USERNAME_LENGTH + 1 # +1 for @ symbol
-    usernames = text.scan(/@[a-z_]{#{minLength},#{maxLength}}/i) #/i case insensitive
+    usernames = text.scan(/@#{User::VALID_USERNAME_CHARACTERS}{#{minLength},#{maxLength}}/i) #/i case insensitive
     usernames.each do |username|
       text.gsub!(/#{username}\b/, username_link(username))
     end
