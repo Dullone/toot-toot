@@ -2,13 +2,24 @@ $toot_form = null
 submitPending = false
 
 init = () ->
+  if $toot_form
+    removeEventHandlers()
   $toot_form = $("#new_toot")
+  registerEventHandlers()
+
+registerEventHandlers = () ->
   $toot_form.on("ajax:success",   tootSumbitSuccess)
   $toot_form.on("ajax:error",     tootSumbitError)
   $toot_form.on("ajax:complete",  onSumbitComplete)
   $toot_form.on("submit",         onSumbit)
   $toot_form.on("keypress",       onKeyPress)
 
+removeEventHandlers = () ->
+  $toot_form.off("ajax:success",   tootSumbitSuccess)
+  $toot_form.off("ajax:error",     tootSumbitError)
+  $toot_form.off("ajax:complete",  onSumbitComplete)
+  $toot_form.off("submit",         onSumbit)
+  $toot_form.off("keypress",       onKeyPress)
 
 onKeyPress = (e) ->
   enterSubmit(e)

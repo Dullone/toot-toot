@@ -13,6 +13,8 @@ init = () ->
   updateRequestTimer = setTimeout(onUpdateInterval, intialRequestInterval)
 
 getNewToots = () ->
+  if requestPending
+    return
   clearUpdateQueue()
   requestNewToots()
   updateRequestTimer = setTimeout(onUpdateInterval, requestIntervalLong)
