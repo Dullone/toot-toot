@@ -6,14 +6,12 @@ replytoToot = (e) ->
   requestTootReply(e.target.href, $(e.target).data("tootid"))
 
 enterSubmit = (e) ->
-  console.log("enterSubmit reply")
   if e.which && e.which == 13 || e.keyCode && e.keyCode == 13
     e.preventDefault()
     sweeAlertConfirm()
 
 sweeAlertConfirm = () ->
   $(".sweet-alert").find("button.confirm")[0].click()
-  console.log("sa confirm")
 
 requestTootReply = (path, data) ->
   request =

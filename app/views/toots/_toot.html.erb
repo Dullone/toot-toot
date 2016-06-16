@@ -1,8 +1,9 @@
+<% options ||= {} %>
 <div class="row">
-  <% options ||= {} %>
 
   <% if !toot_is_reply?(toot) %>
-    <div class="toot-container" data-toot-link="<%= user_toot_path(toot.user, toot.id) %>">
+    <div class="toot-container" data-toot-link="<%= user_toot_path(toot.user, toot.id) %>"
+                                data-tootid="<%= toot.id %>">
       
         <%= render partial: "/toots/toot_content", locals: { toot: toot } %>
     
@@ -12,9 +13,11 @@
         <% if options[:show_all_replies] || current_user &&
                 ( current_user.following.include?(reply.user) || 
                   reply.user == current_user) %>
-          <div class="toot-reply-container">
+          <div class="toot-container" data-tootid="<%= reply.id %>">
+            <div class="toot-reply-container">
 
             <%= render partial: "/toots/toot_content", locals: { toot: reply } %>
+          </div>
 
           </div>
         <% end %>
@@ -24,11 +27,13 @@
     </div>
   <% elsif defined?(options) && options[:render_replies_as_single]== true %>
     <% original = original_toot(toot) %>
-    <div class="toot-container" data-toot-link="<%= user_toot_path(original.user, original.id) %>">
-      <div class="toot-reply-container">
+    <div class="toot-container" data-toot-link="<%= user_toot_path(original.user, original.id) %>"
+                                data-tootid="<%= toot.id %>">
+      <div class="toot-reply-container" data-original-tootid="<%= original.id %>">
         <%= render partial: "/toots/toot_content", locals: { toot: toot } %>
 
       </div>
     </div>
+  
   <% end %>
 </div>

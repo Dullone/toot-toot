@@ -52,8 +52,19 @@ addNewToots = (toots) ->
     do(toot) ->
       newToots++
       $toot = $(toot)
-      $tootsContainer.prepend($toot)
+      $reply_container = $toot.find(".toot-reply-container")
+      if $reply_container
+        originalTootDiv = findTootDivByID($reply_container.data("original-tootid"))
+        console.log($toot)
+        $toot.removeClass("row")
+        originalTootDiv.append($toot)
+      else
+        $tootsContainer.prepend($toot)
       $toot.hide().slideDown()
+
+findTootDivByID = (id)->
+  selector = '.toot-container[data-tootid="' +  id + '"]'
+  return $(selector)
 
 error = (response) ->
   requestPending = false
