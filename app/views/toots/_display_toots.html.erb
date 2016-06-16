@@ -21,9 +21,19 @@
   <% end %>
 
   <div id="toots-container">
+    <% if !toots.kind_of?(Array) %>
+      <% toots = [toots] %>
+      <% no_paginate = true %>
+    <% end %>
     <% toots.each do |toot| %>
       <%= render partial: "toots/toot", locals: { toot: toot, options: options } %>
     <% end %>
   </div>
-  
+
+  <%#-----------Paginate  -----------%>
+  <% unless no_paginate %> 
+    <div id="infinite-scrolling">
+      <%= will_paginate @toots %>
+    </div>  
+  <% end %>
 </div>

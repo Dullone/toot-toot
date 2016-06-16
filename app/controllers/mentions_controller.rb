@@ -9,6 +9,8 @@ class MentionsController < ApplicationController
     if @user
       @mentions = @user.mentions.select(:toot_id).limit(20)
       @toots = Toot.where("id IN (?)", @mentions)
+                    .paginate(page: params[:page], per_page: 20)
+                    .to_a
     end
   end
 end

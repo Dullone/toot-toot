@@ -1,7 +1,7 @@
 class TootsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :feed, :delete]
   include TootsHelper
-  
+
   def show
     @user = User.friendly.find(params[:user_id])
     @toot = Toot.find(params[:id])
@@ -13,13 +13,14 @@ class TootsController < ApplicationController
   end
 
   def index
+    toots_per_page = 20
     begin
       @user = User.friendly.find(params[:user_id])
     rescue ActiveRecord::RecordNotFound
       render file: 'public/404.html', status: :not_found
       return
     end
-    @toots = @user.toots
+    @toots = @user.toots.paginate(page: params[:page], per_page: toots_per_page).to_a
   end
 
   def create
@@ -60,7 +61,8 @@ class TootsController < ApplicationController
 
 
   def feed
-    @toots = current_user.feed
+    toots_per_page = 20
+    @toots = current_user.feed(params[:page], toots_per_page).to_a
     @user = current_user
     setLastFeedUpdate
   end

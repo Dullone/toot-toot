@@ -32,6 +32,7 @@ gem 'rails-jquery-autocomplete'
 source 'https://rails-assets.org' do
   gem 'rails-assets-sweetalert' 
 end
+gem 'will_paginate', '~> 3.0.5'
 
 group :production do
   gem 'rails_12factor'

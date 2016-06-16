@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   has_many :mentions, dependent: :destroy
 
   def toots_and_retoots(limit = 20)
-    (toots.limit(limit) + retooted.limit(limit))[0...limit]
+    toots.merge(retooted).limit(limit)
   end
 
   def toots_and_retoots_since(time, limit = 20)
@@ -60,10 +60,12 @@ class User < ActiveRecord::Base
                self.toots.where("created_at > ?", time).limit(limit)).uniq
   end
 
-  def feed(limit = 20)
-    user_toots = toots_and_retoots
-    following_toots = Toot.where("user_id IN (?)", following_ids)
-    (user_toots + following_toots)[0..limit].uniq.sort!{ |f, s| s[:created_at] <=> f[:created_at ]}
+  def feed(page = 1, limit = 20)
+    feed_toots = Toot.where("user_id IN (?) OR id IN (?)", 
+                            (following_ids << id), 
+                            retoot_ids)
+                     .order(created_at: :desc)
+    feed_toots.paginate(per_page: limit, page: page)
   end
 
   def getFeedTootsSince(time)
