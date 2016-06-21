@@ -68,7 +68,7 @@ module TootsHelper
     username = at_username[1..-1]
     user = User.ci_find_by_username(username)
     if user 
-      return link_to at_username, user_path(username)
+      return link_to at_username, user_toots_path(username.downcase)
     end
     at_username
   end

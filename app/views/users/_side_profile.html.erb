@@ -5,15 +5,16 @@
     <%= render partial: "/follows/dynamic_follow_button", locals: { user: @user} %>
   <% end %>
 
-  <% if user.bio %>
-    <div class="mini-profile">
+  <div class="mini-profile">
+    <% if user.bio %>
       <% miniProfileMaxLength = 100 %>
       <%= user.bio[0..miniProfileMaxLength] %>
       <% if user.bio.length > miniProfileMaxLength  %>
-        <%= link_to("...", "javascript:void(0)" ) %>
+        <%= link_to("...", user_path(user) ) %>
       <% end %>
-    </div>
-  <% end %>
+    <% end %>
+    <%= link_to("view profile", user_path(user) ) %>
+  </div>
   
   <table>
     <tr> 

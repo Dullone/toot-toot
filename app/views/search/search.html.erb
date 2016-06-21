@@ -1,4 +1,13 @@
 <div class="generic-container">
   <h2>Search results</h2>
-  <%= render @users %>
+  
+  <% @users.each do |user| %>
+    <div class="user-result">
+      <%= render user %>
+    </div>
+  <% end %>
+
+  <% if @users.length > 19 %>
+    "Search tesults limted to 20"
+  <% end %>
 </div>
