@@ -11,6 +11,11 @@ class MentionsController < ApplicationController
       @toots = Toot.where("id IN (?)", @mentions)
                     .paginate(page: params[:page], per_page: 20)
                     .to_a
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 end

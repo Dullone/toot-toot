@@ -20,11 +20,12 @@
     <% options[:show_replies] = show_replies %>
   <% end %>
 
+  <% if !toots.kind_of?(Array) %>
+    <% toots = [toots] %>
+    <% no_paginate = true %>
+  <% end %>
+
   <div id="toots-container">
-    <% if !toots.kind_of?(Array) %>
-      <% toots = [toots] %>
-      <% no_paginate = true %>
-    <% end %>
     <% toots.each do |toot| %>
       <%= render partial: "toots/toot", locals: { toot: toot, options: options } %>
     <% end %>

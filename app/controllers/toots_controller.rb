@@ -21,6 +21,10 @@ class TootsController < ApplicationController
       return
     end
     @toots = @user.toots.paginate(page: params[:page], per_page: toots_per_page).to_a
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -64,6 +68,10 @@ class TootsController < ApplicationController
     toots_per_page = 20
     @toots = current_user.feed(params[:page], toots_per_page).to_a
     @user = current_user
+    respond_to do |format|
+      format.html
+      format.js
+    end
     setLastFeedUpdate
   end
 

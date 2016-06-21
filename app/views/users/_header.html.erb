@@ -15,7 +15,8 @@
   <div id="user-search">
     <%= form_tag("/search", method: "get") do %>
       <%= label_tag "search" %>
-      <%= text_field_tag :q %>
+      <%=  autocomplete_field_tag :username, '' , autocomplete_user_username_users_path,
+                                  'data-auto-focus' => true %>
     <% end %>
   </div>
 </div>

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get "followers" => "follows#followers"
     resources :mentions, only: [:index]
     get :autocomplete_user_at_username, :on => :collection
+    get :autocomplete_user_username, :on => :collection
   end
 
   resources :retoots, only: [:create, :destroy]
@@ -25,5 +26,6 @@ Rails.application.routes.draw do
   get "toots/feed" => "toots#feed"
 
   get "toot_replies/requestReply" => "toot_replies#requestReply"
+  get "search" => "search#search"
 
 end

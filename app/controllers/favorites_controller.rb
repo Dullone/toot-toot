@@ -4,6 +4,10 @@ class FavoritesController < ApplicationController
     if User.friendly.exists_by_friendly_id?(params[:user_id])
       @user = User.friendly.find_by_friendly_id(params[:user_id])
       @toots = @user.favorite_toots.paginate(page: params[:page], per_page: 20).to_a
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
       render file: 'public/404.html', status: :not_found
     end
