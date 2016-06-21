@@ -53,7 +53,7 @@ addNewToots = (toots) ->
       newToots++
       $toot = $(toot)
       $reply_container = $toot.find(".toot-reply-container")
-      if $reply_container
+      if $reply_container.length > 0
         originalTootDiv = findTootDivByID($reply_container.data("original-tootid"))
         console.log($toot)
         $toot.removeClass("row")
