@@ -92,7 +92,7 @@ body{
     @include field-blue;
   }
   input{
-    margin: 8px 0;
+    margin: 0 0 8px 0;
   }
 }
 #new-toot-colapse{
@@ -191,4 +191,8 @@ ul.ui-front{
   height: 23px;
   border: 1px solid #ccc;
   background: #f0f0f0;
+}
+
+#username{
+  height: 24px;
 }
