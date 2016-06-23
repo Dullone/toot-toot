@@ -1,7 +1,7 @@
 <div class="toot-bottom-bar">
-
+<% if current_user %>
   <%# -------Reply-------- %>
-  <% unless toot_is_reply?(toot) %>
+  <% unless toot_is_reply?(toot)  %>
     <%= link_to "reply", user_toot_toot_replies_path(toot.user, toot), 
                   class: "replyto-toot", "data-tootid"=> toot.id %>
   <% end %>
@@ -17,7 +17,7 @@
   
   <%# -------Favorites-------- %>
   <% unfav_url = "" %>
-  <% if current_user && current_user.favorite_toots.include?(toot) %>
+  <% if current_user.favorite_toots.include?(toot) %>
     <% favorite_text = "unfav" %>
     <% is_favorite = true %>
     <% unfav_url = user_favorite_path(current_user, 
@@ -36,8 +36,9 @@
   <% end %>
 
   <%# ------Delete-------- %>
-  <% if current_user && toot.user_id == current_user.id %>
+  <% if toot.user_id == current_user.id %>
     <%= link_to "delete", user_toot_path(current_user, toot.id), 
                           class: "delete-toot"  %> 
   <% end %>
+<% end %>
 </div>
