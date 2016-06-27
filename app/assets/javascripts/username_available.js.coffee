@@ -27,6 +27,10 @@ onUsernameChanged = (event) ->
   checkDelay = setTimeout(checkUsernameAvailibity, 500, $username_box.val())
 
 checkUsernameAvailibity = (username) ->
+  console.log(username)
+  if username.length < 3
+    showAvailibility({message: "too short", available: false})
+    return
   request =
     url: "usernameAvailable"
     data: 
@@ -39,6 +43,7 @@ checkUsernameAvailibity = (username) ->
   $.ajax(request)
 
 showAvailibility = (response) ->
+  removeClasses()
   $availibility.text(response.message)
   $availibility.addClass(availibilityClass[response.available])
 
