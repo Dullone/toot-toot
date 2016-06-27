@@ -1,8 +1,8 @@
-<div class="main-container">
-  <h1>Help</h1>
-  <h2><%= link_to "New user", new_user_registration_path %></h2>
-  <% unless user_signed_in? %>
-    <h2><%= link_to "Login", new_user_session_path %></h2>
-  <% end %>
-  <h2><%= link_to "users", users_path %> </h2>
+<div class="row">
+  <div class="main-container col-md-6">
+    <h2><%= link_to "New user", new_user_registration_path %></h2>
+    <% unless user_signed_in? %>
+      <h2><%= link_to "Login", new_user_session_path %></h2>
+    <% end %>
+  </div>
 </div>
