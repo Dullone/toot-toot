@@ -1,9 +1,8 @@
 $retoot_container = null
 $clicked_toot = null
 
-init = (retoot_container) ->
-  $retoot_container = $(retoot_container)
-  $retoot_container.click(retoot)
+init = (toots_container, retoot_container) ->
+  $(toots_container).on("click", retoot_container, retoot)
 
 retoot = (event_data) ->
   $clicked_toot = $(this)
@@ -34,4 +33,4 @@ retoot_error = (response) ->
 
 
 $(document).on "page:change", -> 
-  init(".toots-container .retoot-toot")
+  init(".toots-container", ".retoot-toot")

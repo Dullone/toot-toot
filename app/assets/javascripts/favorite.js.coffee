@@ -2,11 +2,10 @@ $favorite_container = null
 $clicked_toot = null
 request_pending = false
 
-init = (favorite_container) ->
-  $favorite_container = $(favorite_container)
-  $favorite_container.click(retoot)
+init = (toots_container, favorite_container) ->
+  $(toots_container).on("click", favorite_container, favorite)
 
-retoot = (event_data) ->
+favorite = (event_data) ->
   if request_pending
     return
   request_pending = true
@@ -64,4 +63,4 @@ favorite_error = (response) ->
   request_pending = false
 
 $(document).on "page:change", -> 
-  init(".toots-container .favorite-toot")
+  init(".toots-container", ".favorite-toot")
