@@ -9,10 +9,9 @@
 
   <%# -------Retoot-------- %>
   <% if isValidRetoot? toot.id %>
-    <%= link_to "retoot", "javascript:void(0)" , class: "retoot-toot", 
-                                          "data-tootid"=> toot.id %>
+    <%= render partial: "/toots/retoot_link", locals: { toot: toot } %>
   <% elsif hasCurrentUserRetooted? toot.id %>
-    <span class="retooted">&#8635;</span>
+    <%= render partial: "/toots/retoot_delete_link", locals: { toot: toot } %>
   <% end %>
   
   <%# -------Favorites-------- %>
