@@ -11,5 +11,7 @@
   <div class="profile-field">
     <span class="profile-label">Website:</span> <%= @user.website %>
   </div>
-
+  <% if @user == current_user %>
+    <%= link_to("edit profile", edit_user_url) %>
+  <% end %>
 </div>
