@@ -33,13 +33,19 @@ class TootsController < ApplicationController
       message =  message.first
     end
 
+    response = { message: "", status: 400 }
+  
     if create_toot(message, current_user)
-      puts "Toot create success"
+      response[:message] = "Toot create success"
     else
-      puts "toot create failure"
+      response[:message] = "toot create failure"
     end
-      
-    redirect_to user_toots_path
+    
+    respond_to do |format|  
+      format.json { render json: response }
+      format.html { redirect_to user_toots_path }
+    end
+    #redirect_to user_toots_path
   end
 
   def destroy

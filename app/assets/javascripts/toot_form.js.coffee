@@ -35,7 +35,9 @@ enterSubmit = (e) ->
     e.preventDefault()
 
 tootSumbitSuccess = (e, data, status, xhr) ->
-  getNewToots()
+  console.log(status)
+  if $("body").hasClass("feed")
+    getNewToots()
   $toot_form.find("input[type=text], textarea").val("")
   $toot_form.find("textarea").blur()
   clearError()

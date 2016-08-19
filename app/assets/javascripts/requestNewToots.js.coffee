@@ -75,4 +75,6 @@ error = (response) ->
 
 $(document).on "page:change", -> 
   clearUpdateQueue()
-  $("#toots-container").ready(init)
+  $("body.feed").ready( ->
+    $("#toots-container").ready(init)
+  )
