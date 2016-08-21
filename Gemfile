@@ -33,7 +33,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-sweetalert' 
 end
 gem 'will_paginate', '~> 3.0.5'
-
+gem 'puma'
 group :production do
   gem 'rails_12factor'
 end
