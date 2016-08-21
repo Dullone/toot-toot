@@ -18,7 +18,6 @@ getNewToots = () ->
   clearUpdateQueue()
   requestNewToots()
   updateRequestTimer = setTimeout(onUpdateInterval, requestIntervalLong)
-  console.log('get new toots')
 
 onUpdateInterval = () ->
   if is_logged_in
@@ -39,6 +38,13 @@ requestNewToots = () ->
 
   requestPending = true
   $.ajax(request)
+  #gootle analytics
+  ga('send', 
+    hitType: 'event',
+    eventCategory: 'request',
+    eventAction: 'getNewToots',
+    eventLabel: 'newFeedToots'
+    )
 
 htmlRecieved = (response) ->
   requestPending = false

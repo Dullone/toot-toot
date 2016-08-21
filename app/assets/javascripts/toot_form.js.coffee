@@ -63,6 +63,13 @@ onSumbitComplete = () ->
   disableForm(false)
   submitPending = false
   showWaitingDiv(false)
+  #google analytics
+  ga('send', 
+    hitType: 'event',
+    eventCategory: 'post',
+    eventAction: 'createToot',
+    eventLabel: 'tootForm'
+    )
 
 checkIfValidToot = () ->
   if $toot_form.find("textarea").val().length < 2
