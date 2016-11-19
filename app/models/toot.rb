@@ -33,9 +33,9 @@ class Toot < ActiveRecord::Base
     maxLength = User::MAX_USERNAME_LENGTH + 1 # +1 for @ symbol
 
     if message[0] == '@' #toot directed at a user
-      parsedToot[:directedAt] = message.downcase.scan(/^@[a-z_]{#{minLength},#{maxLength}}/).first
+      parsedToot[:directedAt] = message.downcase.scan(/^@[a-z_0-9]{#{minLength},#{maxLength}}/).first
     end
-    mentions = message.downcase.scan(/(?:@)([a-z_]{#{minLength},#{maxLength}})/)
+    mentions = message.downcase.scan(/(?:@)([a-z_0-9]{#{minLength},#{maxLength}})/)
     mentions.each do |m| #scan gave us an array of arrays as we used capture groups
       parsedToot[:mentions] << m.first
     end
