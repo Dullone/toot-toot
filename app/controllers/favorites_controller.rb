@@ -16,27 +16,32 @@ class FavoritesController < ApplicationController
   def create
     message = "error"
     unfav_url = ""
-    if current_user.friendly_id == params[:user_id] && Toot.exists?(params[:toot_id])
+    toot_id = params[:toot_id]
+    if current_user.friendly_id == params[:user_id] && Toot.exists?(toot_id)
       favorite = current_user.favorites.new(toot_id: params[:toot_id])
       if favorite.save()
         message = "saved"
-        unfav_url = user_favorite_path(current_user, favorite)
+        toot = Toot.find(toot_id);
+        fav_link = render_to_string(partial: "/toots/toot_favorite_link", locals: { toot: toot })
       end
     end
 
     respond_to do |format|
-      format.json { render json: { message: message, unfav_url: unfav_url } }
+      format.json { render json: { message: message, fav_link: fav_link } }
     end
   end
 
   def destroy
     favorite = Favorite.find_by_id(params[:id])
+    toot = favorite.toot    
     if current_user && current_user.friendly_id == params[:user_id] && favorite
       favorite.destroy()
     end
 
+    fav_link = render_to_string(partial: "/toots/toot_favorite_link", locals: { toot: toot } )
+
     respond_to do |format|
-      format.json { render json: { :message => "deleted" } }
+      format.json { render json: { :message => "deleted", fav_link: fav_link } }
     end
 
   end

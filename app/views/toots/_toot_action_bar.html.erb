@@ -2,6 +2,7 @@
 <% if current_user %>
   <%# -------Reply-------- %>
   <% unless toot_is_reply?(toot)  %>
+    <i class='glyphicon glyphicon-share-alt'></i>
     <%= link_to "reply", user_toot_toot_replies_path(toot.user, toot), 
                   class: "replyto-toot", "data-tootid"=> toot.id %>
   <% end %>
@@ -15,29 +16,12 @@
   <% end %>
   
   <%# -------Favorites-------- %>
-  <% unfav_url = "" %>
-  <% if current_user.favorite_toots.include?(toot) %>
-    <% favorite_text = "unfav" %>
-    <% favorite_icon = "glyphicon-heart" %>
-    <% is_favorite = true %>
-    <% unfav_url = user_favorite_path(current_user, 
-                   current_user.favorites.where(toot: toot)[0]) %>
-  <% elsif user_signed_in? %>
-    <% favorite_text = "fav" %>
-    <% favorite_icon = "glyphicon-heart-empty" %>
-    <% is_favorite = false %>
-  <% else %>
-    <% favorite_text = "" %> 
-  <% end %>
-  <% if favorite_text != "" %>
-    <%= link_to favorite_text, "javascript:void(0)" , class: "favorite-toot", 
-                    "data-favorite"=>is_favorite, "data-tootid"=> toot.id,
-                    "data-unfav-url"=>unfav_url,
-                    "data-fav-url"=>user_favorites_path(current_user) %>
-  <% end %>
+      
+  <%= render partial: "/toots/toot_favorite_link", locals: { toot: toot } %>  
 
   <%# ------Delete-------- %>
   <% if toot.user_id == current_user.id %>
+    <i class='glyphicon glyphicon-ban-circle'></i>
     <%= link_to "delete", user_toot_path(current_user, toot.id), 
                           class: "delete-toot"  %> 
   <% end %>

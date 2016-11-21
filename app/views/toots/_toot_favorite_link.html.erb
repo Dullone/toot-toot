@@ -1,0 +1,25 @@
+<% unfav_url = "" %>
+  <% if toot && current_user.favorite_toots.include?(toot) %>
+    <% favorite_text = "unfav" %>
+    <% favorite_icon = "glyphicon-heart" %>
+    <% is_favorite = true %>
+    <% unfav_url = user_favorite_path(current_user, 
+                   current_user.favorites.where(toot: toot)[0]) %>
+  <% elsif user_signed_in? %>
+    <% favorite_text = "fav" %>
+    <% favorite_icon = "glyphicon-heart-empty" %>
+    <% is_favorite = false %>
+  <% else %>
+    <% favorite_text = "" %> 
+  <% end %>
+  <% if favorite_text != "" %>
+    <a href="javascript:void(0)"  class="favorite-toot" 
+                    data-favorite  = "<%= is_favorite %>" 
+                    data-tootid    = "<%= toot.id %>"
+                    data-unfav-url = "<%= unfav_url %>"
+                    data-fav-url   = "<%= user_favorites_path(current_user) %> "
+                    >
+      <i class="glyphicon <%= favorite_icon %>" ></i>
+      <%= favorite_text %>  
+    </a>
+  <% end %>

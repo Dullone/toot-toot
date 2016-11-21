@@ -23,7 +23,6 @@ favorite = (event_data) ->
 
 
 send_favorite_request = (toot_id, request_type, url) ->
-  console.log(url)
   request =
     url: url
     type: request_type
@@ -36,26 +35,17 @@ send_favorite_request = (toot_id, request_type, url) ->
   $.ajax(request)
 
 favorite_complete = (response) ->
-  #change retoot link color
-  if response.message == "saved"
-    $clicked_toot.data("unfav-url", response.unfav_url)
-    changeTootToFavorite($clicked_toot)
-  else if response.message == "deleted"
-    changeTootToNotFavorite($clicked_toot)
-  else
-    console.log(response.message)
+  console.log(response.fav_link)
+  console.log ($clicked_toot)
+  $clicked_toot.replaceWith(response.fav_link)
 
   request_pending = false
 
 changeTootToFavorite = ($toot) ->
-  console.log("displayTootAsFavorite")
-  console.log($toot)
   $toot.text("unfav")
   $toot.data("favorite", true)
 
 changeTootToNotFavorite = ($toot) ->
-  console.log("displayTootAsNotFavorite")
-  console.log ($toot)
   $toot.text("fav")
   $toot.data("favorite", false)
 
