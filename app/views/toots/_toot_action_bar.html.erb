@@ -18,11 +18,13 @@
   <% unfav_url = "" %>
   <% if current_user.favorite_toots.include?(toot) %>
     <% favorite_text = "unfav" %>
+    <% favorite_icon = "glyphicon-heart" %>
     <% is_favorite = true %>
     <% unfav_url = user_favorite_path(current_user, 
                    current_user.favorites.where(toot: toot)[0]) %>
   <% elsif user_signed_in? %>
     <% favorite_text = "fav" %>
+    <% favorite_icon = "glyphicon-heart-empty" %>
     <% is_favorite = false %>
   <% else %>
     <% favorite_text = "" %> 

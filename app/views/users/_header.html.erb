@@ -1,22 +1,34 @@
-<div class="header">
-  <% if user_signed_in? %>
-      <span class="username"><%= current_user.username %></span>
-      <%= link_to "sign out",  destroy_user_session_path , method: :delete %> | 
-      <%= link_to("edit profile", edit_user_path(current_user) ) %> |
-      <%= link_to "my toots", user_toots_path(current_user) %> |
-      <%= link_to "feed", toots_feed_path  %> |
-      <%= link_to "metions", user_mentions_path(current_user) %> |
-  <% elsif controller_name != "sessions" && action_name != "new" %>
-    <%= link_to "sign in",  user_session_path %> |
-  <% else %>
-    <%= "not signed in" %>
-  <% end %>
-  <%= link_to "users", users_path %>
-  <div id="user-search">
-    <%= form_tag("/search", method: "get") do %>
-      <%= label_tag "search" %>
-      <%=  autocomplete_field_tag :username, '' , autocomplete_user_username_users_path,
-                                  'data-auto-focus' => true %>
+<div class="navbar navbar-default navbar-static-top">
+  <ul class="nav navbar-nav ">
+    <% if user_signed_in? %> 
+      
+      <li class="dropdown">
+        <a href="%" class="navbar-brand dropdown-toggle" data-toggle='dropdown' id="navbarUserActions" role="button" aria-haspopup="true" aria-expanded="false"> <%= current_user.username %>
+          <i class="caret"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "sign out",  destroy_user_session_path , method: :delete %> </li>
+          <li><%= link_to("edit profile", edit_user_path(current_user) ) %> </li>
+        </ul>
+      </li>
+      <li><%= link_to "feed", toots_feed_path  %> </li>
+      <li><%= link_to "my toots", user_toots_path(current_user) %> </li>
+      <li><%= link_to "metions", user_mentions_path(current_user) %> </li>     
+
+    <% elsif controller_name != "sessions" && action_name != "new" %>
+      <li><%= link_to "sign in",  user_session_path %> </li>
     <% end %>
-  </div>
+    <li><%= link_to "users", users_path %></li>
+  </ul>
+
+  <%= form_tag("/search", method: "get", id: "user-search", class: "nav navbar-nav navbar-form navbar-right" ) do %>
+    <div class="form-group">
+      <%=  autocomplete_field_tag :username, '' , autocomplete_user_username_users_path,
+                                'data-auto-focus' => true,
+                                class: 'form-control',
+                                placeholder: 'user search' %>
+      <%= submit_tag "search", class: "btn btn-default" %>
+    </div>
+  <% end %>
+
 </div>
