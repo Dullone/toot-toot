@@ -1,2 +1,5 @@
-<%= link_to "↻", "javascript:void(0)" , class: "retoot-toot", 
-            "data-tootid"=> toot.id, "data-action"=> "delete" %>
+<a href="javascript:void(0)" class="retoot-toot", title="delete retoot" 
+                              data-tootid="<%= toot.id %>" 
+                              data-action="delete">
+  <i class=" glyphicon glyphicon-repeat"></i>
+</a>

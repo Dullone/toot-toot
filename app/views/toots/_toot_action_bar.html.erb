@@ -2,9 +2,12 @@
 <% if current_user %>
   <%# -------Reply-------- %>
   <% unless toot_is_reply?(toot)  %>
-    <i class='glyphicon glyphicon-share-alt'></i>
-    <%= link_to "reply", user_toot_toot_replies_path(toot.user, toot), 
-                  class: "replyto-toot", "data-tootid"=> toot.id %>
+    
+    <a href="<%= user_toot_toot_replies_path(toot.user, toot) %>"
+                  class="replyto-toot", data-tootid="<%= toot.id %> ">
+      <i class='glyphicon glyphicon-share-alt'></i>
+      reply
+    </a>
   <% end %>
 
 
@@ -21,9 +24,10 @@
 
   <%# ------Delete-------- %>
   <% if toot.user_id == current_user.id %>
-    <i class='glyphicon glyphicon-ban-circle'></i>
-    <%= link_to "delete", user_toot_path(current_user, toot.id), 
-                          class: "delete-toot"  %> 
+    <a href="<%= user_toot_path(current_user, toot.id) %>" class="delete-toot">
+      <i class='glyphicon glyphicon-ban-circle'></i>
+      delete
+    </a>
   <% end %>
 <% end %>
 </div>
