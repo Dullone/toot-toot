@@ -1,10 +1,1 @@
-<div >
-  <div class="page-title col-md-9"> Mentions </div>
-</div>
-<div class="col-md-3">
-    <%= render partial: "users/side_profile", locals: { user: @user } %> 
-</div>
-<%= render partial: "toots/display_toots", locals: { toots: @toots, 
-                                    render_replies_as_single: true,
-                                    show_replies: false,
-                                    hide_toot_form: true  } %>
+<%= render partial: "toots/toot_view_with_sidebar", locals: { user: @user, toots: @toots, title: "Mentions" } %>
