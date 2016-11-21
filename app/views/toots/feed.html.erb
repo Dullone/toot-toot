@@ -1,12 +1,14 @@
-<div class="col-md-3">
-    <%= render partial: "users/side_profile", locals: { user: @user } %> 
-    <div class="generic-container col-md-12">
-      <h4>Treding tags</h4>
-      <div>
-        <% Tag.limit(5).each do |tag| %>
-          <%= link_to tag.tag, tag_path(tag) %><br/>
-        <% end  %>
+<div class="row">
+  <div class="col-md-3 col-sm-3 hidden-xs">
+      <%= render partial: "users/side_profile", locals: { user: @user } %> 
+      <div class="well col-md-12">
+        <h4>Treding tags</h4>
+        <div>
+          <% Tag.limit(5).each do |tag| %>
+            <%= link_to tag.tag, tag_path(tag) %><br/>
+          <% end  %>
+        </div>
       </div>
-    </div>
+  </div>
+  <%= render partial: "toots/display_toots", locals: { toots: @toots } %>
 </div>
-<%= render partial: "toots/display_toots", locals: { toots: @toots } %>
