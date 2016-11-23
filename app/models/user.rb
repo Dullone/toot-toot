@@ -49,10 +49,6 @@ class User < ActiveRecord::Base
   #mentions
   has_many :mentions, dependent: :destroy
 
-  def toots_and_retoots(limit = 20)
-    toots.merge(retooted).limit(limit)
-  end
-
   def toots_and_retoots_since(time, limit = 20)
     new_retoots = Retoot.where("user_id IN (?) AND created_at > ?", following_ids, time).select("toot_id").limit(limit)
     (Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc) + 
@@ -69,7 +65,6 @@ class User < ActiveRecord::Base
   end
 
   def getFeedTootsSince(time)
-    #new_toots = Toot.where("user_id IN (?) AND created_at > ?", following_ids, time).order(created_at: :desc)
     toots_and_retoots_since(time)
   end
 

@@ -78,17 +78,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "toots_and_retoots" do 
-    it "includes user toots" do 
-      toot #create toot
-      expect(user.toots_and_retoots).to include(toot)
-    end
-    it "includes retoots" do 
-      user.retoots.create(toot: user1Toot1)
-      expect(user.toots_and_retoots).to include(user1Toot1)
-    end
-  end
-
   describe "feed" do 
 
     before(:each) do 
