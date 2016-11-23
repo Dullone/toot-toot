@@ -1,6 +1,7 @@
 class TootsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :feed, :delete]
-  include TootsHelper
+
+  include TootCreation
 
   def show
     @user = User.friendly.find(params[:user_id])
@@ -103,7 +104,7 @@ class TootsController < ApplicationController
           #us unshift so when we unwind the array on the client, its in the correct order
           response[:toots].unshift(render_to_string partial: "toots/toot", locals: { 
                       toot: toot,  options: { show_replies: false, 
-                        no_row: true,
+                                              no_row: true,
                                               render_replies_as_single: true}})
       end
       format.json { render json: response }
