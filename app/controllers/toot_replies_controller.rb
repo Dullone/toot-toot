@@ -1,6 +1,6 @@
 class TootRepliesController < ApplicationController
   before_action :authenticate_user!, only: [:create]
-  include TootsHelper
+  include TootCreation
 
   def create
     replyToot = create_toot(params[:toot][:message], current_user)
