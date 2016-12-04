@@ -27,7 +27,7 @@ autocomplete :user, :username, extra_data: [:name]
     begin
       @user = User.friendly.find(params[:id].downcase)
     rescue ActiveRecord::RecordNotFound
-      render file: 'public/404.html', status: :not_found
+      page_not_found
     end
   end
 

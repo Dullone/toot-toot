@@ -18,7 +18,7 @@ class TootsController < ApplicationController
     begin
       @user = User.friendly.find(params[:user_id])
     rescue ActiveRecord::RecordNotFound
-      render file: 'public/404.html', status: :not_found
+      page_not_found
       return
     end
     @toots = @user.toots.paginate(page: params[:page], per_page: toots_per_page).to_a

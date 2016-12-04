@@ -1,7 +1,7 @@
 class MentionsController < ApplicationController
   def index
     unless User.friendly.exists_by_friendly_id?(params[:user_id])
-      render file: 'public/404.html', status: :not_found
+      page_not_found
       return
     end
 

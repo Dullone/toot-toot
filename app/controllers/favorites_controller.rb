@@ -1,3 +1,5 @@
+include PageErrors
+
 class FavoritesController < ApplicationController
   def index
     #check if exsist first, find_by_friendly_id throws exception if not found
@@ -9,7 +11,7 @@ class FavoritesController < ApplicationController
         format.js
       end
     else
-      render file: 'public/404.html', status: :not_found
+      page_not_found
     end
   end
 
