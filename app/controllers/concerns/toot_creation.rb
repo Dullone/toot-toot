@@ -6,7 +6,8 @@ module TootCreation
     parsedToot[:mentions].each do |u|
       user = User.ci_find_by_username u
       if user
-        toot.mentions.create user: user
+        mention = toot.mentions.new user: user
+        mention.save!
       end
     end
   end
@@ -17,21 +18,27 @@ module TootCreation
     hasthtags.each do  |tag|
       thisTag = Tag.find_by_tag(tag)
       unless thisTag #if tag doesn't exit, create it
-        thisTag = Tag.create(tag: tag)
+        thisTag = Tag.new(tag: tag)
+        thisTag.save!
       end
-      Tagged.create(tag: thisTag, toot: toot)
+      tagged = Tagged.new(tag: thisTag, toot: toot)
+      tagged.save!
     end
   end
 
   def create_toot(message, user)
     toot = user.toots.new(message: message)
-    if toot.save
-      create_mentions(toot)
-      create_tags(toot)
-      return toot
-    else
+
+    begin
+      Toot.transaction do
+        toot.save!
+        create_mentions(toot)
+        create_tags(toot)
+      end
+    rescue ActiveRecord::RecordInvalid
       return false
     end
+    toot
   end
   
 end
