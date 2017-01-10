@@ -3,7 +3,7 @@ Rails.application.routes.draw do
                     { sessions: 'users/sessions', 
                       registrations: 'users/registrations' }
   
-  root to: "toots#feed"
+  root to: "static_pages#homepage"
   get "users/usernameAvailable" => "users#usernameAvailable"
   get "users/newFeedToots" => "toots#newFeedToots"
 
